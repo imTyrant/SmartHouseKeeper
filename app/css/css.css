@@ -1,0 +1,148 @@
+@charset "utf-8";
+/* CSS Document */
+.tab{
+	position: relative;
+	left: 966px;
+	top: 45px;
+}
+.divcss{
+	position: absolute;
+	left: 719px;
+	top: 63px;
+}
+
+.image{
+	position: absolute;
+	left: 590px;
+	top: 25px;
+}
+
+.divcss1{
+	position: relative;
+	left: 719px;
+	top: -262px;
+
+	
+}
+
+.body
+{
+	background-size: 800px 450px;
+	background-repeat: no-repeat;
+}
+
+.divcss2{
+	position: absolute;
+	left: 247px;
+	top: 231px;
+}
+
+.divcss3{
+	position: absolute;
+	left: 255px;
+	top: 50px;
+}
+
+.divcss4{
+	position: absolute;
+	left: 425px;
+	top: 120px;
+	
+}
+
+.divcss5{
+	position: absolute;
+	left: 587px;
+	top: 120px;
+}
+
+.divcss6{
+	position: absolute;
+	left: 594px;
+	top: 293px;
+}
+
+.divcss7{
+	position: absolute;
+	left: 389px;
+	top: 299px;
+}
+
+.divcss8{
+	position: absolute;
+	left: 495px;
+	top: 365px;
+}
+
+.divcss9{
+	position: absolute;
+	left: 60px;
+	top: 300px;
+}
+
+.divcss10{
+	position:absolute;
+	left:719px;
+	top: 380px;
+}
+
+
+.image1{
+	position: absolute;
+	left: 205px;
+	top: 57px;
+}
+
+.image2{
+	position: absolute;
+	left: 400px;
+	top: 26px;
+}
+
+.image3{
+	position: absolute;
+	left: 206px;
+	top: 131px;
+}
+
+.image4{
+	position: absolute;
+	left: 357px;
+	top: 278px;
+}
+
+.image5{
+	position: absolute;
+	left: 616px;
+	top: 98px;
+}
+
+.image6{
+	position: absolute;
+	left: 616px;
+	top: 262px;
+}
+
+.image7{
+	position: absolute;
+	left: 298px;
+	top: 375px;
+}
+
+.image8{
+	position: absolute;
+	left: 372px;
+	top: 105px;
+}
+
+.image9{
+	position: absolute;
+	left: 456px;
+	top: 353px;
+}
+
+.choose{
+	position: absolute;
+	left: 56px;
+	top: 224px;
+}
