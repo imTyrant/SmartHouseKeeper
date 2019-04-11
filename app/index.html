@@ -11,10 +11,72 @@
     <script src="./js/jQueryAssets/jquery-1.11.1.min.js"></script>
     <script src="./js/jQueryAssets/jquery.ui-1.10.4.button.min.js"></script>
     <script src="./js/utils.js"></script>
-
 </head>
 
 <body background="./img/房屋.jpg" class="body">
+    <div style="margin-left:700px">
+        <p>  </p> <p id="path2file"><script>document.getElementById("path2file").innerHTML = "日志: " + log_path;</script></p>
+    </div>
+    <div class="divcss1">
+        <ul>
+            <li id="li0">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button0" onClick="out0()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button0_dis" onClick="dis0()"
+                    alt="去除">
+                <img src="./img/气象仪.png" width="35px" height="35px" alt=""><strong>气象仪</strong>
+            </li>
+            <li id="li1">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button1" onClick="out1()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button1_dis" onClick="dis1()"
+                    alt="去除">
+                <img src="./img/窗户.png" width="30px" height="30px" alt=""><strong> 窗户</strong></li>
+            <li id="li2">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button2" onClick="out2()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button2_dis" onClick="dis2()"
+                    alt="去除">
+                <img src="./img/空调.png" width="35px" height="30px" alt=""><strong> 空调</strong></li>
+            <li id="li3">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button3" onClick="out3()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button3_dis" onClick="dis3()"
+                    alt="去除">
+                <img src="./img/温湿度传感器_o.png" width="35px" height="35px" alt=""><strong> 温湿度计</strong></li>
+            <li id="li4">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button4" onClick="out4()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button4_dis" onClick="dis4()"
+                    alt="去除">
+                <img src="./img/距离传感器.png" width="30px" height="30px" alt=""><strong> 动作传感器</strong></li>
+            <li id="li5">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button5" onClick="out5()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button5_dis" onClick="dis5()"
+                    alt="去除">
+                <img src="./img/警报.png" width="30px" height="32px" alt=""><strong> 烟雾报警器</strong></li>
+            <li id="li6">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button6" onClick="out6()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button6_dis" onClick="dis6()"
+                    alt="去除">
+                <img src="./img/咖啡机.png" width="35px" height="30px" alt=""><strong> 咖啡机</strong></li>
+            <li id="li7">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button7" onClick="out7()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button7_dis" onClick="dis7()"
+                    alt="去除">
+                <img src="./img/门.png" width="30px" height="30px" alt=""><strong> 门</strong></li>
+            <li id="li8">
+                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button8" onClick="out8()"
+                    alt="添加">
+                <input type="image" src="./img/减少.png" width="30" height="25" id="button8_dis" onClick="dis8()"
+                    alt="去除">
+                <img src="./img/漏水检测器.png" width="30px" height="30px" alt=""><strong> 漏水检测器</strong></li>
+        </ul>
+    </div>
+
 
     <div class="tab">
         <table width="200" border="1" id="tab">
@@ -163,65 +225,7 @@
         </table>
     </div>
 
-    <div class="divcss1">
-        <ul>
-            <li id="li0">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button0" onClick="out0()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button0_dis" onClick="dis0()"
-                    alt="去除">
-                <img src="./img/气象仪.png" width="35px" height="35px" alt=""><strong>气象仪</strong>
-            </li>
-            <li id="li1">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button1" onClick="out1()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button1_dis" onClick="dis1()"
-                    alt="去除">
-                <img src="./img/窗户.png" width="30px" height="30px" alt=""><strong> 窗户</strong></li>
-            <li id="li2">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button2" onClick="out2()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button2_dis" onClick="dis2()"
-                    alt="去除">
-                <img src="./img/空调.png" width="35px" height="30px" alt=""><strong> 空调</strong></li>
-            <li id="li3">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button3" onClick="out3()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button3_dis" onClick="dis3()"
-                    alt="去除">
-                <img src="./img/温湿度传感器_o.png" width="35px" height="35px" alt=""><strong> 温湿度计</strong></li>
-            <li id="li4">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button4" onClick="out4()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button4_dis" onClick="dis4()"
-                    alt="去除">
-                <img src="./img/距离传感器.png" width="30px" height="30px" alt=""><strong> 动作传感器</strong></li>
-            <li id="li5">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button5" onClick="out5()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button5_dis" onClick="dis5()"
-                    alt="去除">
-                <img src="./img/警报.png" width="30px" height="32px" alt=""><strong> 烟雾报警器</strong></li>
-            <li id="li6">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button6" onClick="out6()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button6_dis" onClick="dis6()"
-                    alt="去除">
-                <img src="./img/咖啡机.png" width="35px" height="30px" alt=""><strong> 咖啡机</strong></li>
-            <li id="li7">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button7" onClick="out7()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button7_dis" onClick="dis7()"
-                    alt="去除">
-                <img src="./img/门.png" width="30px" height="30px" alt=""><strong> 门</strong></li>
-            <li id="li8">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button8" onClick="out8()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button8_dis" onClick="dis8()"
-                    alt="去除">
-                <img src="./img/漏水检测器.png" width="30px" height="30px" alt=""><strong> 漏水检测器</strong></li>
-        </ul>
-    </div>
+
     <div class="divcss9">
         <input type="image" src="./img/重置.png" width="35px" height="35px" id="res" onClick="res()" alt="重置">
     </div>
@@ -280,10 +284,9 @@
 
 
     <div class="choose">
-        <form name="CCCC" action="servlet.jsp" method="post">
-            <input type="hidden" id="date" name="data" value="0" />
-            <input type="button" value="随机触发" onClick="choose()">
-        </form>
+        <input type="hidden" id="date" name="data" value="0" /> </br>
+        <input type="button" value="随机触发" onClick="choose()" /> </br></br>
+        <input type="button" value="保存" onClick="save()" /> </br>
     </div>
 </body>
 

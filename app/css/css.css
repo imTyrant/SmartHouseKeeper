@@ -1,28 +1,25 @@
 @charset "utf-8";
 /* CSS Document */
-.tab{
-	position: relative;
-	left: 966px;
-	top: 45px;
-}
+
 .divcss{
 	position: absolute;
-	left: 719px;
-	top: 63px;
+	float: left;
+	margin-left: 700px;
+}
+.tab{
+	position: absolute;
+	margin-left: 920px;
+}
+.divcss1{
+	position: relative;
+	float: left;
+	margin-left: 680px;
 }
 
 .image{
 	position: absolute;
 	left: 590px;
 	top: 25px;
-}
-
-.divcss1{
-	position: relative;
-	left: 719px;
-	top: -262px;
-
-	
 }
 
 .body
@@ -77,7 +74,7 @@
 .divcss9{
 	position: absolute;
 	left: 60px;
-	top: 300px;
+	top: 330px;
 }
 
 .divcss10{
