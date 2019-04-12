@@ -1,9 +1,9 @@
 # SmartHouseKeeper
 
-* The variable ```num``` in ```utils.js``` is dangerous. When both the plus and minus button is pressed, it is increased by one. But some time there are no devices or sensors added in to the array, which may case a index pointing to a ```null``` value.
-* The randomness is too simple, which may cause high redundancy, thus, a new **pseudo random mechanism** is needed, and it is too slow to traverse all of possible events.
-* Age is not added. Need an implementation.
-* Here is an example of collected data: *(1 stands for on/open, 0 stands for off/close, and -1 means the device is not added. And approvement of decision is 1, otherwise 0.)*
+* 在```utils.js```中的变量 ```num```使用起来很危险。因为加号或者减号被按下之后，```num```会自加一。但是如果此时没有设备被添加，那么会这个```num```会指向一个```null```对象。
+* 随机数生成算法太简单了，会导致想遍历完所有的可能的状态需要很长的时间。所以最好换成一个**伪随机**的算法。
+* 年龄这个选项还没有添加。
+* 下面是收集到的数据的例子： *（1代表开，0代表关闭，-1表示该设备没有添加。decision表示用户决策，1表示同意，0表示拒绝。）*
 ```
 {
     "aerograph": 0,
