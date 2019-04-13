@@ -226,9 +226,6 @@
     </div>
 
 
-    <div class="divcss9">
-        <input type="image" src="./img/重置.png" width="35px" height="35px" id="res" onClick="res()" alt="重置">
-    </div>
     <div class="divcss2"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room0" onClick="show0()"
             alt="添加"></div>
     <div class="divcss3"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room1" onClick="show1()"
@@ -284,9 +281,14 @@
 
 
     <div class="choose">
-        <input type="hidden" id="date" name="data" value="0" /> </br>
-        <input type="button" value="随机触发" onClick="choose()" /> </br></br>
-        <input type="button" value="保存" onClick="save()" /> </br>
+        <input type="hidden" id="date" name="data" value="0" />
+        <p>随机触发事件：</p>
+        <input type="button" value="随机触发" onClick="choose()" />
+        <p>设置日志路径：</p>
+        <input type="button" value="..." onClick="save()" />
+        </br>
+        </br>
+        <input type="image" src="./img/重置.png" width="35px" height="35px" id="res" onClick="res()" alt="重置">
     </div>
 </body>
 
