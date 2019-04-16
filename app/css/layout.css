@@ -1,0 +1,177 @@
+@charset "utf-8";
+/* CSS Document */
+#container{
+    width: 1160px;
+    height: 900px;
+    /* background-color: yellowgreen; */
+}
+
+#control_panel{
+    position: absolute;
+    margin-top: 150px;
+    width: 150px;
+    height: 200px;
+}
+
+#house{
+    position: absolute;
+    background-image: url('../img/房屋.jpg');
+    background-size: 800px 450px;
+    width: 800px;
+    height: 450px;
+}
+
+#devices{
+    position: relative;
+    width: 250px;
+    height: 450px;
+    /* background-color: aqua; */
+    margin-left: 710px;
+    float: left;
+}
+
+#status{
+    position: relative;
+    width: 200px;
+    height: 450px;
+    /* background-color: burlywood; */
+    float: left;
+}
+
+#path{
+    position: absolute;
+    top: 450px;
+    width: 100px;
+    height: 50px;
+    /* background-color: teal; */
+}
+
+#reset{
+    border: 0;
+    background: transparent;
+}
+
+.tab_status{
+    width: 200px;
+    text-align: center;
+    border:solid 1px #c9dfc3;
+}
+
+.panel{
+    margin:0px;
+    font-size: 12px;
+    background-color: white;
+    border:solid 1px gray;
+}
+.flip{
+    margin:0px;
+    padding:5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    background:#768999;
+    border:solid 2px #c3c3c3;
+}
+
+/* History. */
+.divcss2{
+	position: absolute;
+	left: 247px;
+	top: 231px;
+}
+
+.divcss3{
+	position: absolute;
+	left: 255px;
+	top: 50px;
+}
+
+.divcss4{
+	position: absolute;
+	left: 425px;
+	top: 120px;
+	
+}
+
+.divcss5{
+	position: absolute;
+	left: 587px;
+	top: 120px;
+}
+
+.divcss6{
+	position: absolute;
+	left: 594px;
+	top: 293px;
+}
+
+.divcss7{
+	position: absolute;
+	left: 389px;
+	top: 299px;
+}
+
+.divcss8{
+	position: absolute;
+	left: 495px;
+	top: 365px;
+}
+.image{
+	position: absolute;
+	left: 590px;
+	top: 25px;
+}
+
+.image1{
+	position: absolute;
+	left: 205px;
+	top: 57px;
+}
+
+.image2{
+	position: absolute;
+	left: 400px;
+	top: 26px;
+}
+
+.image3{
+	position: absolute;
+	left: 206px;
+	top: 131px;
+}
+
+.image4{
+	position: absolute;
+	left: 357px;
+	top: 278px;
+}
+
+.image5{
+	position: absolute;
+	left: 616px;
+	top: 98px;
+}
+
+.image6{
+	position: absolute;
+	left: 616px;
+	top: 262px;
+}
+
+.image7{
+	position: absolute;
+	left: 298px;
+	top: 375px;
+}
+
+.image8{
+	position: absolute;
+	left: 372px;
+	top: 105px;
+}
+
+.image9{
+	position: absolute;
+	left: 456px;
+	top: 353px;
+}

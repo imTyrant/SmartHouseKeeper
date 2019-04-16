@@ -2,294 +2,114 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="./css/css.css">
-    <link href="./js/jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
-    <link href="./js/jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
-    <link href="./js/jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
+
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <link href="js/jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+    <link href="js/jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+    <link href="js/jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <title>iot</title>
-    <script src="./js/jQueryAssets/jquery-1.11.1.min.js"></script>
-    <script src="./js/jQueryAssets/jquery.ui-1.10.4.button.min.js"></script>
-    <script src="./js/utils.js"></script>
+    <script src="js/jQueryAssets/jquery-1.11.1.min.js"></script>
+    <script src="js/jQueryAssets/jquery.ui-1.10.4.button.min.js"></script>
+
+    <script>if (window.module) module = window.module;</script>
+    
+    <script src="js/params.js"></script>
+    <script src="js/util.js"></script>
 </head>
 
-<body background="./img/房屋.jpg" class="body">
-    <div style="margin-left:700px">
-        <p>  </p> <p id="path2file"><script>document.getElementById("path2file").innerHTML = "日志: " + log_path;</script></p>
-    </div>
-    <div class="divcss1">
-        <ul>
-            <li id="li0">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button0" onClick="out0()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button0_dis" onClick="dis0()"
-                    alt="去除">
-                <img src="./img/气象仪.png" width="35px" height="35px" alt=""><strong>气象仪</strong>
-            </li>
-            <li id="li1">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button1" onClick="out1()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button1_dis" onClick="dis1()"
-                    alt="去除">
-                <img src="./img/窗户.png" width="30px" height="30px" alt=""><strong> 窗户</strong></li>
-            <li id="li2">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button2" onClick="out2()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button2_dis" onClick="dis2()"
-                    alt="去除">
-                <img src="./img/空调.png" width="35px" height="30px" alt=""><strong> 空调</strong></li>
-            <li id="li3">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button3" onClick="out3()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button3_dis" onClick="dis3()"
-                    alt="去除">
-                <img src="./img/温湿度传感器_o.png" width="35px" height="35px" alt=""><strong> 温湿度计</strong></li>
-            <li id="li4">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button4" onClick="out4()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button4_dis" onClick="dis4()"
-                    alt="去除">
-                <img src="./img/距离传感器.png" width="30px" height="30px" alt=""><strong> 动作传感器</strong></li>
-            <li id="li5">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button5" onClick="out5()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button5_dis" onClick="dis5()"
-                    alt="去除">
-                <img src="./img/警报.png" width="30px" height="32px" alt=""><strong> 烟雾报警器</strong></li>
-            <li id="li6">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button6" onClick="out6()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button6_dis" onClick="dis6()"
-                    alt="去除">
-                <img src="./img/咖啡机.png" width="35px" height="30px" alt=""><strong> 咖啡机</strong></li>
-            <li id="li7">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button7" onClick="out7()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button7_dis" onClick="dis7()"
-                    alt="去除">
-                <img src="./img/门.png" width="30px" height="30px" alt=""><strong> 门</strong></li>
-            <li id="li8">
-                <input type="image" src="./img/添加 (1).png" width="25" height="25" id="button8" onClick="out8()"
-                    alt="添加">
-                <input type="image" src="./img/减少.png" width="30" height="25" id="button8_dis" onClick="dis8()"
-                    alt="去除">
-                <img src="./img/漏水检测器.png" width="30px" height="30px" alt=""><strong> 漏水检测器</strong></li>
-        </ul>
+<body>
+    <!-- The container hold all of elements. -->
+    <div id='container'>
+        <!-- The div shows house, devices and some button. -->
+        <div id='house'>
+
+            <div id='control_panel'>
+                <label>随机事件：</label>
+                <button id='random' onclick='choose()'>ROLL</button>
+                <br />
+                <br />
+                <label>设置保存路径：</label>
+                <button id='save'>...</button>
+                <br />
+                <br />
+                <label>重置设置：</label>
+                <button id='reset'><img src="img/重置.png" width="15px" height="15px"></button>
+            </div>
+
+            <!-- Buttons for add devices -->
+            <div class="divcss2"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="parlour"
+                    onClick="show(this.id)" alt="添加"></div>
+            <div class="divcss3"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="balcony"
+                    onClick="show(this.id)" alt="添加"></div>
+            <div class="divcss4"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="bedroom1"
+                    onClick="show(this.id)" alt="添加"></div>
+            <div class="divcss5"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="bedroom2"
+                    onClick="show(this.id)" alt="添加"></div>
+            <div class="divcss6"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="bedroom3"
+                    onClick="show(this.id)" alt="添加"></div>
+            <div class="divcss7"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="kitchen"
+                    onClick="show(this.id)" alt="添加"></div>
+            <div class="divcss8"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="wc"
+                    onClick="show(this.id)" alt="添加"></div>
+
+            <!-- Display added devices in each room -->
+            <div class="image1">
+                <img src="./img/气象仪.png" width="45px" height="40px" style="display:none" id="balcony_aerograph">
+            </div>
+            <div class="image">
+                <img src="./img/窗户.png" width="50px" height="50px" style="display:none" id="bedroom2_window">
+            </div>
+            <div class="image2">
+                <img src="./img/窗户.png" width="50px" height="50px" style="display:none" id="bedroom1_window">
+            </div>
+            <div class="image3">
+                <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="parlour_ac">
+                <img src="./img/距离传感器.png" width="50px" height="50px" style="display:none" id="parlour_action">
+                <img src="./img/警报.png" width="40px" height="40px" style="display:none" id="parlour_smoke">
+                <img src="./img/温湿度传感器_o.png" width="40px" height="40px" style="display:none" id="parlour_temp">
+            </div>
+            <div class="image8">
+                <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="bedroom1_ac">
+                <img src="./img/温湿度传感器_o.png" width="50px" height="50px" style="display:none" id="bedroom1_temp">
+            </div>
+            <div class="image5">
+                <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="bedroom2_ac">
+                <img src="./img/温湿度传感器_o.png" width="50px" height="50px" style="display:none" id="bedroom2_temp">
+            </div>
+            <div class="image6">
+                <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="bedroom3_ac">
+                <img src="./img/温湿度传感器_o.png" width="50px" height="50px" style="display:none" id="bedroom3_temp">
+            </div>
+            <div class="image7">
+                <img src="./img/门.png" width="50px" height="50px" style="display:none" id="parlour_door">
+            </div>
+            <div class="image4">
+                <img src="./img/咖啡机.png" width="40px" height="40px" style="display:none" id="kitchen_coffee_mac">
+                <img src="./img/警报.png" width="40px" height="40px" style="display:none" id="kitchen_smoke">
+            </div>
+            <div class="image9">
+                <img src="./img/漏水检测器.png" width="35px" height="35px" style="display:none" id="wc_water_leaker">
+            </div>
+
+        </div>
+
+        <!-- Show devices which can be added into room. -->
+        <div id='devices'>
+            <label style="font-weight: bold;">当前房间：</label>
+            <label id='selected_room'></label>
+            <ul id='devices_list'></ul>
+        </div>
+
+        <!-- Show current status. -->
+        <div id='status'></div>
+
+        <!-- For electron, show the path for store log file. -->
+        <div id='path'></div>
     </div>
 
-
-    <div class="tab">
-        <table width="200" border="1" id="tab">
-
-            <tbody>
-                <tr>
-                    <td>&nbsp;&nbsp;设备</td>
-                    <td>&nbsp;状态</td>
-                </tr>
-                <tr>
-                    <td>&nbsp;1.气象仪</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="aerograph" />
-                        <script>
-                            document.getElementById("aerograph").value = map['aerograph'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;2.客厅空调</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="ac_main" />
-                        <script>
-                            document.getElementById("ac_main").value = map['ac_main'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;3.动作传感器</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="action" />
-                        <script>
-                            document.getElementById("action").value = map['action'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;4.烟雾报警器</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="alarm_main" />
-                        <script>
-                            document.getElementById("alarm_main").value = map['alarm_main'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;5.客厅温度计</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="temp_main" />
-                        <script>
-                            document.getElementById("temp_main").value = map['temp_main'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;6.门</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="door" />
-                        <script>
-                            document.getElementById("door").value = map['door'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;7.次卧空调</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="ac_sub2" />
-                        <script>
-                            document.getElementById("ac_sub2").value = map['ac_sub2'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;8.次卧温度计</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="temp_sub2" />
-                        <script>
-                            document.getElementById("temp_sub2").value = map['temp_sub2'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;9.次卧窗户</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="window_sub2" />
-                        <script>
-                            document.getElementById("window_sub2").value = map['window_sub2'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;10.主卧空调</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="ac_sub1" />
-                        <script>
-                            document.getElementById("ac_sub1").value = map['ac_sub1'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;11.主卧温度计</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="temp_sub1" />
-                        <script>
-                            document.getElementById("temp_sub1").value = map['temp_sub1'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;12.主卧窗户</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="window_sub1" />
-                        <script>
-                            document.getElementById("window_sub1").value = map['window_sub1'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;13.漏水检测器</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="water_laker" />
-                        <script>
-                            document.getElementById("water_laker").value = map['water_laker'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;14.咖啡机</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="coffee_mac" />
-                        <script>
-                            document.getElementById("coffee_mac").value = map['coffee_mac'];
-                        </script>
-                    </td>
-                </tr>
-                <tr>
-                    <td>&nbsp;15.厨房烟雾报警</td>
-                    <td><input readonly size="1" border="0px" style="text-align: center" type="text" value=""
-                            id="alarm_kitchen" />
-                        <script>
-                            document.getElementById("alarm_kitchen").value = map['alarm_kitchen'];
-                        </script>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-
-    <div class="divcss2"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room0" onClick="show0()"
-            alt="添加"></div>
-    <div class="divcss3"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room1" onClick="show1()"
-            alt="添加"></div>
-    <div class="divcss4"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room2" onClick="show2()"
-            alt="添加"></div>
-    <div class="divcss5"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room3" onClick="show3()"
-            alt="添加"></div>
-    <div class="divcss6"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room4" onClick="show4()"
-            alt="添加"></div>
-    <div class="divcss7"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room5" onClick="show5()"
-            alt="添加"></div>
-    <div class="divcss8"><input type="image" src="./img/添加 (1).png" width="25" height="25" id="room6" onClick="show6()"
-            alt="添加"></div>
-
-    <div class="image1">
-        <img src="./img/气象仪.png" width="45px" height="40px" style="display:none" id="qixiangyi" alt="">
-    </div>
-    <div class="image">
-        <img src="./img/窗户.png" width="50px" height="50px" style="display:none" id="img" alt="">
-    </div>
-    <div class="image2">
-        <img src="./img/窗户.png" width="50px" height="50px" style="display:none" id="window2" alt="">
-    </div>
-    <div class="image3">
-        <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="ac1" alt="" value="1">
-        <img src="./img/距离传感器.png" width="50px" height="50px" style="display:none" id="distance" alt="">
-        <img src="./img/警报.png" width="40px" height="40px" style="display:none" id="alarm1" alt="">
-        <img src="./img/温湿度传感器_o.png" width="40px" height="40px" style="display:none" id="temp" alt="">
-    </div>
-    <div class="image8">
-        <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="ac2" alt="">
-        <img src="./img/温湿度传感器_o.png" width="50px" height="50px" style="display:none" id="temp2" alt="">
-    </div>
-    <div class="image5">
-        <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="ac3" alt="">
-        <img src="./img/温湿度传感器_o.png" width="50px" height="50px" style="display:none" id="temp3" alt="">
-    </div>
-    <div class="image6">
-        <img src="./img/空调.png" width="40px" height="40px" style="display:none" id="ac4" alt="">
-        <img src="./img/温湿度传感器_o.png" width="50px" height="50px" style="display:none" id="temp4" alt="">
-    </div>
-    <div class="image7">
-        <img src="./img/门.png" width="50px" height="50px" style="display:none" id="door1" alt="">
-    </div>
-    <div class="image4">
-        <img src="./img/咖啡机.png" width="40px" height="40px" style="display:none" id="coffee" alt="">
-        <img src="./img/警报.png" width="40px" height="40px" style="display:none" id="alarm2" alt="">
-    </div>
-    <div class="image9">
-        <img src="./img/漏水检测器.png" width="35px" height="35px" style="display:none" id="waterlaker" alt="">
-    </div>
-
-
-    <div class="choose">
-        <input type="hidden" id="date" name="data" value="0" />
-        <p>随机触发事件：</p>
-        <input type="button" value="随机触发" onClick="choose()" />
-        <p>设置日志路径：</p>
-        <input type="button" value="..." onClick="save()" />
-        </br>
-        </br>
-        <input type="image" src="./img/重置.png" width="35px" height="35px" id="res" onClick="res()" alt="重置">
-    </div>
 </body>
 
 </html>
