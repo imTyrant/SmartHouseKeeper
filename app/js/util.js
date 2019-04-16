@@ -1,3 +1,34 @@
+const os = require('os');
+const path = require('path');
+const fs = require('fs');
+const {ipcRenderer} = require('electron');
+
+let log_path = path.resolve(os.homedir(), 'log.txt');
+let decisions = [];
+
+function saveDataToFile(data) {
+    
+    if (typeof(data) !== "string") {
+        let str = ""
+        data.forEach(element => {
+            str += element + '\n';
+        });
+        
+        return;
+    }
+    fs.writeFileSync(log_path, data + '\n', {flag: 'a'});
+}
+
+function save() {
+    ipcRenderer.send('pick-file-path');
+}
+
+ipcRenderer.on('file-path-selected', (event, path) => {
+    if (path) log_path = path;
+    document.getElementById("path").innerHTML = "<p><b>日志:</b> " + log_path + "</p>";
+});
+
+
 let room_setup = new Map();
 let devices_added = new Map();
 let current_room;
@@ -69,6 +100,13 @@ function choose() {
     }
     update_status(event_room);
     update_status(action_room);
+
+    let log_obj = {};
+    devices_added.forEach((value, key) => {
+        log_obj[key] = value;
+    });
+    log_obj['decision'] = choice;
+    saveDataToFile(JSON.stringify(log_obj));
 }
 
 function show(room_id) {
@@ -129,6 +167,7 @@ function update_status(the_room) {
 
 
 $('document').ready(() => {
+    document.getElementById("path").innerHTML = "<p><b>日志:</b> " + log_path + "</p>";
     document.getElementById('selected_room').innerHTML = '未选择';
     for (var each in room) {
         room_setup.set(each, new Array());
