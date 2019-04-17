@@ -32,11 +32,13 @@ ipcRenderer.on('file-path-selected', (event, path) => {
 let room_setup = new Map();
 let devices_added = new Map();
 let current_room;
+let try_times = 0;
 
 let divce_shuffled = [];
 let shuffle_reader = -1;
 
 function shuffle_swap() {
+    divce_shuffled = [];
     devices_added.forEach((value, key) => {
         divce_shuffled.push(key);
     });
@@ -57,11 +59,16 @@ function shuffle_read() {
 }
 
 function choose() {
+    if (devices_added.length < 2) return;
+
     let choice;
     let event = shuffle_read();
-    console.log(shuffle_reader);
     let action = shuffle_read();
-    console.log(shuffle_reader);
+
+    console.log(action);
+    while (event == action) {
+        action = shuffle_read();
+    }
 
     console.log(event);
     console.log(action);
@@ -76,9 +83,9 @@ function choose() {
     
     let action_room = tmp2[0];
     let action_device = tmp2[1];
-    console.log(event, devices_added.get(event));
+    
     devices_added.set(event, (devices_added.get(event) + 1) % 2);
-    console.log(event, devices_added.get(event));
+    
 
 
     var se = confirm(
@@ -100,6 +107,7 @@ function choose() {
     }
     update_status(event_room);
     update_status(action_room);
+    document.getElementById('times_of_try').innerHTML = ++ try_times;
 
     let log_obj = {};
     devices_added.forEach((value, key) => {
@@ -169,6 +177,7 @@ function update_status(the_room) {
 $('document').ready(() => {
     document.getElementById("path").innerHTML = "<p><b>日志:</b> " + log_path + "</p>";
     document.getElementById('selected_room').innerHTML = '未选择';
+    document.getElementById('times_of_try').innerHTML = try_times;
     for (var each in room) {
         room_setup.set(each, new Array());
         var obj = room[each];

@@ -24,11 +24,11 @@ const device = {
         'name': '窗户',
         'img': img_path +  '窗户.png',
     },
-    'water_leaker': {
+    'waterleaker': {
         'name': '漏水检测器',
         'img': img_path +  '漏水检测器.png',
     },
-    'coffee_mac': {
+    'coffeemac': {
         'name': '咖啡机',
         'img': img_path +  '咖啡机.png',
     },
@@ -57,11 +57,11 @@ const room = {
     },
     'kitchen': {
         'name': '厨房',
-        'usable_devices' : ['smoke', 'coffee_mac'],
+        'usable_devices' : ['smoke', 'coffeemac'],
     },
     'wc': {
         'name': '厕所',
-        'usable_devices' : ['water_leaker']
+        'usable_devices' : ['waterleaker']
     },
     'balcony': {
         'name': '阳台',

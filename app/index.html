@@ -27,16 +27,20 @@
         <div id='house'>
 
             <div id='control_panel'>
-                <label>随机事件：</label>
+                <label><b>随机事件：</b></label>
                 <button id='random' onclick='choose()'>ROLL</button>
                 <br />
                 <br />
-                <label>设置保存路径：</label>
+                <label><b>设置保存路径：</b></label>
                 <button id='save' onclick='save()'>...</button>
                 <br />
                 <br />
-                <label>重置设置：</label>
+                <label><b>重置设置：</b></label>
                 <button id='reset'><img src="img/重置.png" width="15px" height="15px"></button>
+                <br />
+                <br />
+                <label><b>已尝试次数：</b></label>
+                <label id='times_of_try'></label>
             </div>
 
             <!-- Buttons for add devices -->
@@ -87,11 +91,11 @@
                 <img src="./img/门.png" width="50px" height="50px" style="display:none" id="parlour_door">
             </div>
             <div class="image4">
-                <img src="./img/咖啡机.png" width="40px" height="40px" style="display:none" id="kitchen_coffee_mac">
+                <img src="./img/咖啡机.png" width="40px" height="40px" style="display:none" id="kitchen_coffeemac">
                 <img src="./img/警报.png" width="40px" height="40px" style="display:none" id="kitchen_smoke">
             </div>
             <div class="image9">
-                <img src="./img/漏水检测器.png" width="35px" height="35px" style="display:none" id="wc_water_leaker">
+                <img src="./img/漏水检测器.png" width="35px" height="35px" style="display:none" id="wc_waterleaker">
             </div>
 
         </div>
