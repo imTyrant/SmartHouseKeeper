@@ -3,7 +3,7 @@ const path = require('path');
 const fs = require('fs');
 const {ipcRenderer} = require('electron');
 
-let log_path = path.resolve(os.homedir(), 'log.txt');
+let log_path = path.resolve(os.homedir(), 'smartiot_log.txt');
 let decisions = [];
 
 function saveDataToFile(data) {
@@ -34,13 +34,19 @@ let devices_added = new Map();
 let current_room;
 let try_times = 0;
 
+// The array for random event.
 let divce_shuffled = [];
+// The array for random action.
+let divce_wihtout_sensor_shuffled = [];
+
 let shuffle_reader = -1;
 
 function shuffle_swap() {
     divce_shuffled = [];
     devices_added.forEach((value, key) => {
         divce_shuffled.push(key);
+        // let tmp = key.split(':');
+
     });
     for (var i = 0; i < divce_shuffled.length; i++) {
         let r = Math.floor(Math.random() * divce_shuffled.length);
@@ -58,50 +64,68 @@ function shuffle_read() {
     return divce_shuffled[shuffle_reader++];
 }
 
-function choose() {
-    if (devices_added.length < 2) return;
-
-    let choice;
+function random_event_action() {
     let event = shuffle_read();
-    let action = shuffle_read();
+    let tmp = event.split(':');
+    let event_room = tmp[0];
+    let event_device = tmp[1];
 
-    console.log(action);
-    while (event == action) {
+    
+    var action, action_room, action_device;
+    
+    do {
         action = shuffle_read();
-    }
+        console.log(action);
+        let tmp = action.split(':');
+        action_room = tmp[0];
+        action_device = tmp[1];
+    } while(device[action_device].type === 'sensor' || event == action);
+    // while(event == action);
 
-    console.log(event);
-    console.log(action);
-    let tmp1 = event.split('_');
-    let tmp2 = action.split('_');
-    if (tmp1.length != 2 || tmp2.length != 2) {
-        console.error('Wrong!');
-        return;
-    }
-    let event_room = tmp1[0];
-    let event_device = tmp1[1];
+    return {
+        'event': event,
+        'action': action,
+        'event_room': event_room,
+        'action_room': action_room,
+        'event_device': event_device,
+        'action_device': action_device
+    };
+}
+
+function choose() {
+    if (devices_added.length < 5) {
+        alert("设备过少（<5）");
+    };
+
+    let choice, event, action, event_room, event_device, action_room, action_device;
     
-    let action_room = tmp2[0];
-    let action_device = tmp2[1];
-    
-    devices_added.set(event, (devices_added.get(event) + 1) % 2);
+    let ttmp = random_event_action();
     
 
+    event=ttmp['event'];
+    action=ttmp['action'];
+    event_room=ttmp['event_room'];
+    action_room=ttmp['action_room'];
+    event_device=ttmp['event_device'];
+    action_device=ttmp['action_device'];
 
+    change_device_status(event, random_device_status(event, Math.random()));
+    let tmp_status =  random_device_status(action, Math.random());
     var se = confirm(
             "[" + 
             room[event_room].name + 
             "]的[" + 
             device[event_device].name + 
-            "]被" +  
-            (devices_added.get(event) == 0 ? '关闭了' : '打开了') +
-            "\n导致了[" + room[action_room].name + "]的[" + device[action_device].name + "]状态变为" + 
-            (devices_added.get(action) == 0 ? '[打开]' : '[关闭]') +
+            "]的状态变为了：" + 
+            get_device_status_name(event_device, devices_added.get(event)) +  
+            "\n导致了[" + room[action_room].name + "]的[" + device[action_device].name + "]状态变为：" + 
+            get_device_status_name(action_device, tmp_status) +
             "，是否允许？"
             );
     if (se) {
         choice = 1;
-        devices_added.set(action, (devices_added.get(action) + 1) % 2);
+        console.log(se, tmp_status);
+        change_device_status(action, tmp_status);
     } else {
         choice = 0;
     }
@@ -136,20 +160,24 @@ function show(room_id) {
 }
 
 function out(device_id) {
-    var index = current_room + '_' + device_id;
+    if (current_room.split(':').length != 1 || device_id.split(':').length != 1) {
+        console.error("Fatal wrong!!!, rooms name or devices name should not contain ':'");
+        return;
+    }
+    var index = current_room + ':' + device_id;
     if (!devices_added.has(index)) {
         document.getElementById(index).style.display = 'block';
         devices_added.set(index, 0);
         room_setup.get(current_room).push(device_id);
     } else {
-        devices_added.set(index, (devices_added.get(index) + 1) % 2);
+        change_device_status(index, random_device_status(index));
     }
 
     update_status(current_room);
 }
 
 function dis(device_id) {
-    var index = current_room + '_' + device_id;
+    var index = current_room + ':' + device_id;
     if (devices_added.has(index)) {
         document.getElementById(index).style.display = 'none';
         devices_added.delete(index);
@@ -167,10 +195,40 @@ function update_status(the_room) {
     var content = "";
     room_setup.get(the_room).forEach((elem) => {
         content += "<tr><td>" + device[elem].name + "</td><td>" +
-            (devices_added.get(the_room + '_' + elem) == 0 ? 'OFF' : 'ON') +
+            get_device_status_name(elem, devices_added.get(the_room + ':' + elem)) +
             "</td></tr>\n";
     });
     document.getElementById('tab_' + the_room).innerHTML = content;
+}
+
+// [index]: represent a device in room needs to change status.
+// [random]: a random seed need for random change status.
+function random_device_status(index, random = 0) {
+    var tmp = index.split(':');
+    var the_device = tmp[1];
+
+    var old_status = devices_added.get(index);
+    var new_status = (devices_added.get(index) + Math.floor(random * device[the_device].all_status.length) + 1) % device[the_device].all_status.length;
+    // In case of no change of status.
+    if (new_status == old_status) {
+        new_status = (devices_added.get(index) + 1) % device[the_device].all_status.length;
+    }
+    return new_status;
+}
+
+// Just change the status based on the [status].
+function change_device_status(index, status) {
+    var tmp = index.split(':');
+    var the_device = tmp[1];
+    if (status >= device[the_device].all_status.length) return;
+    devices_added.set(index, status);
+}
+
+// Switch English unreadable device identifier to a readable Chinese string.
+function get_device_status_name(id, index) {
+    if (device[id] === 'undefined') return 'undefined';
+    if (device[id].all_status.length <= index) return 'undefined';
+    return device[id].all_status[index];
 }
 
 
