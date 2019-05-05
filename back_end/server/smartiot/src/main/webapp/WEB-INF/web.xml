@@ -12,6 +12,19 @@
   	<servlet-class>web.RegisterUser</servlet-class>
   </servlet>
 
+  <servlet>
+  	<servlet-name>SubmitChoice</servlet-name>
+  	<display-name>SubmitChoice</display-name>
+  	<servlet-class>web.SubmitChoice</servlet-class>
+  </servlet>
+
+  <servlet>
+  	<servlet-name>LoginUser</servlet-name>
+  	<display-name>LoginUser</display-name>
+  	<servlet-class>web.LoginUser</servlet-class>
+  </servlet>
+
+
 
   <!-- servlets mapping -->
   <servlet-mapping>
@@ -19,8 +32,20 @@
   	<url-pattern>/RegisterUser</url-pattern>
   </servlet-mapping>
 
+  <servlet-mapping>
+  	<servlet-name>LoginUser</servlet-name>
+  	<url-pattern>/LoginUser</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+  	<servlet-name>SubmitChoice</servlet-name>
+  	<url-pattern>/SubmitChoice</url-pattern>
+  </servlet-mapping>
+
+
   <!-- resource-ref -->
   <resource-ref>
+      <description>MySQL DB Connection</description>
       <res-ref-name>jdbc/SHKDB</res-ref-name>
       <res-type>javax.sql.DataSource</res-type>
       <res-auth>Container</res-auth>

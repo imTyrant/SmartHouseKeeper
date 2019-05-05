@@ -32,7 +32,7 @@
 | sid | varchar\[255\] | 这个是唯一表示用户的配置的。|
 | sname | varchar\[255\] | 可以设定一个配置的别名，辅助记忆。|
 | house_version | varchar\[255\]]| 房间的版本号，以备以后可能会有多个房间。 |
-| setting | varchar\[1000\] | 记录用户对于房间的具体布置。这个设置字符容量大一点防止不够存。暂定保存的时候直接存json格式。 |
+| setting | varchar\[5000\] | 记录用户对于房间的具体布置。这个设置字符容量大一点防止不够存。暂定保存的时候直接存json格式。 |
 
 
 ### **choices**
@@ -45,4 +45,4 @@
 | sid | varchar\[255\] | 与**house_setup**表中的`sid`项相同。 |
 | software_version | varchar\[255\] | 当前软件的版本，防止版本之间更改太大，影响学习的过程。 |
 | time | varchar\[255\] | 事件（决策）发生的时间。 |
-| status | varchar\[1000\] | 保存用户决策，以及当前状态。 |
+| status | varchar\[5000\] | 保存用户决策，以及当前状态。 |

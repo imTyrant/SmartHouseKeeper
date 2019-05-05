@@ -1,8 +1,9 @@
-const version = "1.3.0";
-let kid = "";
+const version = "1.3.0"; // 这个表示版本号，每次有大修改的时候，记得改一下。
+let kid = "";   
 let sid = "";
 let time = "";
-// Used for electron.
+
+// Used for electron, ignore in web environment.
 if (this !== window) {
 
     const os = require('os');
@@ -45,26 +46,8 @@ let current_room;
 let divce_shuffled = [];
 let shuffle_reader = -1;
 
-function shuffle_swap() {
-    devices_added.forEach((value, key) => {
-        divce_shuffled.push(key);
-    });
-    for (var i = 0; i < divce_shuffled.length; i++) {
-        let r = Math.floor(Math.random() * divce_shuffled.length);
-        var tmp = divce_shuffled[r];
-        divce_shuffled[r] = divce_shuffled[i];
-        divce_shuffled[i] = tmp;
-    }
-    shuffle_reader = 0;
-}
 
-function shuffle_read() {
-    if (shuffle_reader == -1 || shuffle_reader == divce_shuffled.length) {
-        shuffle_swap();
-    }
-    return divce_shuffled[shuffle_reader++];
-}
-
+// Functions used in web buttons.
 function choose() {
     let choice;
     let event = shuffle_read();
@@ -178,6 +161,28 @@ function dis(device_id) {
     }
 }
 
+// Make random event and action pair.
+function shuffle_swap() {
+    devices_added.forEach((value, key) => {
+        divce_shuffled.push(key);
+    });
+    for (var i = 0; i < divce_shuffled.length; i++) {
+        let r = Math.floor(Math.random() * divce_shuffled.length);
+        var tmp = divce_shuffled[r];
+        divce_shuffled[r] = divce_shuffled[i];
+        divce_shuffled[i] = tmp;
+    }
+    shuffle_reader = 0;
+}
+
+function shuffle_read() {
+    if (shuffle_reader == -1 || shuffle_reader == divce_shuffled.length) {
+        shuffle_swap();
+    }
+    return divce_shuffled[shuffle_reader++];
+}
+
+// Update elements of page
 function update_status(the_room) {
     var content = "";
     room_setup.get(the_room).forEach((elem) => {
@@ -207,7 +212,7 @@ function digestMessage(message) {
     return window.crypto.subtle.digest('SHA-256', data);
 }
 
-
+// Initialization code during page loading.
 $('document').ready(() => {
     digestMessage("kid" + Date.now().toString()).then(digest => {
         kid = hexString(digest);

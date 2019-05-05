@@ -20,13 +20,13 @@ public class DBInteractor {
     private Connection conn = null;
 
     private DBInteractor() throws SQLException, NamingException {
-        // Read config file from server.
-        // Context ctx = (Context) new InitialContext().lookup("java:/comp/env");
-        // ds = (DataSource) ctx.lookup("jdbc/SHKDB");
+        // // Read config file from server.
+        // Context initContext = new InitialContext();
+        // Context envContext = (Context) initContext.lookup("java:comp/env");
+        // ds = (DataSource) envContext.lookup("jdbc/SHKDB");
 
-        String dbDriver = "com.mysql.cj.jdbc.Driver";
+        String dbDriver = "com.mysql.jdbc.Driver";
         String dbURL = "jdbc:mysql://localhost:3306/";
-        // Database name to access
         String dbName = "smarthousekeeper";
         String dbUsername = "root";
         String dbPassword = "lab000000";
@@ -36,10 +36,8 @@ public class DBInteractor {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        Connection con = DriverManager.getConnection(dbURL + dbName, 
-                                                     dbUsername,  
-                                                     dbPassword);
-        conn = ds.getConnection();
+        conn = DriverManager.getConnection(dbURL + dbName,  dbUsername,  dbPassword);
+        // conn = ds.getConnection();
     }
 
     public static DBInteractor getDBConnection() {

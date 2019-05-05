@@ -33,24 +33,22 @@ public class RegisterUser extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        
     }
 
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try {
-            PrintWriter out = resp.getWriter();
-            SHKDOA shkdoa = DAOFactory.getDOA("keepers");
-            for (MKeeper each : (List<MKeeper>) shkdoa.getAll()) {
-                out.write(each.getKid() +each.getAge() + "\n");
-            }
+    // @Override
+    // protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    //     try {
+    //         PrintWriter out = resp.getWriter();
+    //         SHKDOA<MKeeper> shkdoa = DAOFactory.getDOA("keepers");
+    //         for (MKeeper each : shkdoa.getAll()) {
+    //             out.write(each.getKid() + each.getAge() + "\n");
+    //         }
             
-            
-		    
-        } catch (DOAInitExecption e) {
-            e.printStackTrace();
-            throw new ServletException();
-        }
-    }
+    //     } catch (DOAInitExecption e) {
+    //         e.printStackTrace();
+    //         throw new ServletException();
+    //     }
+    // }
     
 }

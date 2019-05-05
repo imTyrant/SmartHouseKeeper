@@ -23,10 +23,9 @@ public class KeeperDOA extends SHKDOA<MKeeper> {
         try {
             if (find(raw.getKid())) return false; // Check whether a same keeper exists.
 
-            String sql = "INSERT INTO ? VALUES(?, ?)";
+            String sql = "INSERT INTO " + this.table + " VALUES(?, ?)";
             PreparedStatement statement = this.dbInteractor.getConnection().prepareStatement(sql);
 
-            statement.setString(0, this.table);
             statement.setString(1, raw.getKid());
             statement.setInt(2, raw.getAge());
 
@@ -45,10 +44,9 @@ public class KeeperDOA extends SHKDOA<MKeeper> {
     public MKeeper get(Object... keys) {
         try {
 
-            String sql = "SELECT * FROM ? WHERE keeper = ?;";
+            String sql = "SELECT * FROM " + this.table + " WHERE keeper = ?;";
             PreparedStatement statement = this.dbInteractor.getConnection().prepareStatement(sql);
 
-            statement.setString(0, this.table);
             statement.setString(1, (String)keys[0]);
 
             ResultSet result = statement.executeQuery(sql);
@@ -77,10 +75,10 @@ public class KeeperDOA extends SHKDOA<MKeeper> {
 
         try {
 
-            String sql = "SELECT * FROM ?;";
+            String sql = "SELECT * FROM " + this.table + ";";
             PreparedStatement statement = this.dbInteractor.getConnection().prepareStatement(sql);
 
-            statement.setString(0, this.table);
+            // statement.setString(0, this.table);
             
             ResultSet result = statement.executeQuery(sql);
 

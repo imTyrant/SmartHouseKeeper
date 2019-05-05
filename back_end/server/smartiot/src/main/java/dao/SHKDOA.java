@@ -29,37 +29,4 @@ abstract public class SHKDOA<T> implements ISHKDOA<T> {
         if (get(keys) != null) return true;
         return false;
     }
-
-    // @Override
-    // public List<T> getAll() {
-    //     LinkedList<T> rtn = new LinkedList<>();
-    
-    //     String sql = "SELECT * FROM %;";
-    //     sql.replace("%", this.table);
-
-    //     try {
-    //         Statement statement = this.dbInteractor.getConnection().createStatement();
-
-    //         ResultSet result = statement.executeQuery(sql);
-
-    //         while (result.next()) {
-    //             Object object = new Object();
-    //             T mChoices = (T) object;
-
-    //             // ((Object) mChoices).setKeeper(result.getString("keeper"));
-    //             // mChoices.setSid(result.getString("sid"));
-    //             // mChoices.setSoftwareVersion(result.getString("software_version"));
-    //             // mChoices.setTime("time");
-    //             // mChoices.setStatus("status");
-
-    //             rtn.add(mChoices);
-    //         }
-
-    //     } catch (Exception e) {
-    //         e.printStackTrace();
-    //         return null;
-    //     }
-
-    //     return rtn;
-    // }
 }

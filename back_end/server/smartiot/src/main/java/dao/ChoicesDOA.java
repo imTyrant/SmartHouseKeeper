@@ -26,10 +26,9 @@ public class ChoicesDOA extends SHKDOA<MChoices> {
         try {
             if (find(raw.getKeeper(), raw.getSid())) return false; // Check whether a same keeper exists.
 
-            String sql = "INSERT INTO ? VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO " + this.table + " VALUES(?, ?, ?, ?, ?)";
             PreparedStatement statement = this.dbInteractor.getConnection().prepareStatement(sql);
 
-            statement.setString(0, this.table);
             statement.setString(1, raw.getKeeper());
             statement.setString(2, raw.getSid());
             statement.setString(3, raw.getSoftwareVersion());
@@ -50,10 +49,9 @@ public class ChoicesDOA extends SHKDOA<MChoices> {
     public MChoices get(Object... keys) {
         try {
 
-            String sql = "SELECT * FROM ? WHERE keeper = ? and sid = ?;";
+            String sql = "SELECT * FROM " + this.table + " WHERE keeper = ? and sid = ?;";
             PreparedStatement statement = this.dbInteractor.getConnection().prepareStatement(sql);
 
-            statement.setString(0, this.table);
             statement.setString(1, (String)keys[0]);
             statement.setString(2, (String)keys[1]);
 
@@ -86,10 +84,8 @@ public class ChoicesDOA extends SHKDOA<MChoices> {
 
         try {
 
-            String sql = "SELECT * FROM ?;";
+            String sql = "SELECT * FROM " + this.table + ";";
             PreparedStatement statement = this.dbInteractor.getConnection().prepareStatement(sql);
-
-            statement.setString(0, this.table);
 
             ResultSet result = statement.executeQuery(sql);
 
