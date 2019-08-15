@@ -1,1 +1,0 @@
-简单测试一下Html+js前端与 Java Servlet 后台之间的通信。
