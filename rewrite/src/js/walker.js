@@ -1,4 +1,6 @@
-module.exports = class Walker {
+"use strict"
+
+class Walker {
     constructor(graphJSON, pathArray) {
         this.graph = graphJSON;
         this.path = pathArray;
@@ -39,3 +41,5 @@ module.exports = class Walker {
         };
     }
 }
+
+module.exports = Walker;

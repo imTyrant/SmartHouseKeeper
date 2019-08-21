@@ -1,3 +1,4 @@
+export default
 {
     "room1": ["room2", "room3", "room4"],
     "room2": ["room1"],

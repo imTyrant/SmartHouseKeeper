@@ -1,5 +1,3 @@
-"use strict"
-
 const os = require('os');
 const path = require('path');
 const fs = require('fs');
@@ -151,8 +149,8 @@ function show(room_id) {
     room[room_id].usable_devices.forEach(each => {
         content +=
             "<li>" +
-            "<input type='image' src='img/添加 (1).png' width='25' height='25' id=" + each + " onClick='out(this.id)' alt='添加'>" +
-            "<input type='image' src='img/减少.png' width='25' height='25' id=" + each + " onClick='dis(this.id)' alt='去除'>" +
+            "<input type='image' src='img/add.png' width='25' height='25' id=" + each + " onClick='out(this.id)' alt='添加'>" +
+            "<input type='image' src='img/remove.png' width='25' height='25' id=" + each + " onClick='dis(this.id)' alt='去除'>" +
             "<img src=" + device[each].img + " width='35px' height='35px'><strong>" + device[each].name + "</strong>" +
             "</li>\n"
     });
