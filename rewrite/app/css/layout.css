@@ -6,7 +6,7 @@
     /* background-color: yellowgreen; */
 }
 
-#control_panel{
+#control-panel{
     position: absolute;
     margin-top: 150px;
     width: 150px;
@@ -79,49 +79,60 @@
     border:solid 2px #c3c3c3;
 }
 
-/* History. */
-.divcss2{
+/* room selection buttons */
+.selection-btn {
+	position: absolute;
+	background: url('../img/add.png') no-repeat;
+	background-size: 100%;
+	border: none;
+	width: 25px;
+	height: 25px;
+}
+
+#parlour {
 	position: absolute;
 	left: 247px;
 	top: 231px;
 }
 
-.divcss3{
+#balcony{
 	position: absolute;
 	left: 255px;
 	top: 50px;
 }
 
-.divcss4{
+#bedroom1{
 	position: absolute;
 	left: 425px;
 	top: 120px;
 	
 }
 
-.divcss5{
+#bedroom2{
 	position: absolute;
 	left: 587px;
 	top: 120px;
 }
 
-.divcss6{
+#bedroom3{
 	position: absolute;
 	left: 594px;
 	top: 293px;
 }
 
-.divcss7{
+#kitchen{
 	position: absolute;
 	left: 389px;
 	top: 299px;
 }
 
-.divcss8{
+#wc{
 	position: absolute;
 	left: 495px;
 	top: 365px;
 }
+
+/* history */
 .image{
 	position: absolute;
 	left: 590px;

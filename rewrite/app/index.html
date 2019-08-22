@@ -2,22 +2,25 @@
 <html>
 
 <head>
-    <link rel="stylesheet" type="text/css" href="css/layout.css">
-
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-
-    <link href="js/jQueryAssets/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
-    <link href="js/jQueryAssets/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
-    <link href="js/jQueryAssets/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
     <meta charset="utf-8">
     <title>iot</title>
-    <script src="js/jQueryAssets/jquery-1.11.1.min.js"></script>
-    <script src="js/jQueryAssets/jquery.ui-1.10.4.button.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/layout.css">
 
-    <script>if (window.module) module = window.module;</script>
+    <!-- <script>if (typeof module === 'object') {window.module = module; module = undefined;} </script>-->
+
+    <!-- <link href="js/jQuery/jquery.ui.core.min.css" rel="stylesheet" type="text/css">
+    <link href="js/jQuery/jquery.ui.theme.min.css" rel="stylesheet" type="text/css">
+    <link href="js/jQuery/jquery.ui.button.min.css" rel="stylesheet" type="text/css">
     
-    <script src="js/params.js"></script>
-    <script src="js/util.js"></script>
+    <script src="js/jQuery/jquery-1.11.1.min.js"></script> -->
+
+    <!-- <script src="js/jquery-3.3.1.js"></script> -->
+    
+    <!-- <script>if (window.module) module = window.module;</script> -->
+    <!-- <script src="js/params.js"></script> -->
+    <script>window.$ = window.jQuery = require('../resources/jQuery/jquery-3.3.1.js');</script>
+    <!-- <script src="js/house.js"></script> -->
+    <script src="js/index.js"></script>
 </head>
 
 <body>
@@ -26,7 +29,7 @@
         <!-- The div shows house, devices and some button. -->
         <div id='house'>
 
-            <div id='control_panel'>
+            <div id='control-panel'>
                 <label><b>随机事件：</b></label>
                 <button id='random' onclick='choose()'>ROLL</button>
                 <br />
@@ -40,24 +43,17 @@
                 <br />
                 <br />
                 <label><b>已尝试次数：</b></label>
-                <label id='times_of_try'></label>
+                <label id='times-of-try'></label>
             </div>
 
-            <!-- Buttons for add devices -->
-            <div class="divcss2"><input type="image" src="./img/add.png" width="25" height="25" id="parlour"
-                    onClick="show(this.id)" alt="添加"></div>
-            <div class="divcss3"><input type="image" src="./img/add.png" width="25" height="25" id="balcony"
-                    onClick="show(this.id)" alt="添加"></div>
-            <div class="divcss4"><input type="image" src="./img/add.png" width="25" height="25" id="bedroom1"
-                    onClick="show(this.id)" alt="添加"></div>
-            <div class="divcss5"><input type="image" src="./img/add.png" width="25" height="25" id="bedroom2"
-                    onClick="show(this.id)" alt="添加"></div>
-            <div class="divcss6"><input type="image" src="./img/add.png" width="25" height="25" id="bedroom3"
-                    onClick="show(this.id)" alt="添加"></div>
-            <div class="divcss7"><input type="image" src="./img/add.png" width="25" height="25" id="kitchen"
-                    onClick="show(this.id)" alt="添加"></div>
-            <div class="divcss8"><input type="image" src="./img/add.png" width="25" height="25" id="wc"
-                    onClick="show(this.id)" alt="添加"></div>
+            <!-- Buttons for adding devices in rooms-->
+            <button class="room-selection-btn selection-btn" id="parlour"></button>
+            <button class="room-selection-btn selection-btn" id="balcony"></button>
+            <button class="room-selection-btn selection-btn" id="bedroom1"></button>
+            <button class="room-selection-btn selection-btn" id="bedroom2"></button>
+            <button class="room-selection-btn selection-btn" id="bedroom3"></button>
+            <button class="room-selection-btn selection-btn" id="kitchen"></button>
+            <button class="room-selection-btn selection-btn" id="wc"></button>
 
             <!-- Display added devices in each room -->
             <div class="image1">

@@ -1,4 +1,5 @@
 const os = require('os');
+const path = require('path');
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
@@ -24,14 +25,18 @@ function createWindow() {
     mainWin = new BrowserWindow({
         width: 1200,
         height: 600,
-        nodeIntegration: true
+        webPreferences: {
+            nodeIntegration: true
+        }
     });
 
-    mainWin.loadFile('index.html');
+    mainWin.loadFile('app/index.html');
 
     mainWin.on('closed', () => {
         mainWin = null
     });
+
+    mainWin.webContents.openDevTools()
 }
 
 function quit() {

@@ -131,7 +131,7 @@ function choose() {
     }
     update_status(event_room);
     update_status(action_room);
-    document.getElementById('times_of_try').innerHTML = ++ try_times;
+    document.getElementById('times-of-try').innerHTML = ++ try_times;
 
     let log_obj = {};
     devices_added.forEach((value, key) => {
