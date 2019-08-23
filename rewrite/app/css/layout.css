@@ -79,16 +79,24 @@
     border:solid 2px #c3c3c3;
 }
 
-/* room selection buttons */
-.selection-btn {
-	position: absolute;
-	background: url('../img/add.png') no-repeat;
-	background-size: 100%;
+
+.opt-btn {
 	border: none;
 	width: 25px;
-	height: 25px;
+	height: 25px;	
 }
 
+.add-btn {
+	background: url('../img/add.png') no-repeat;
+	background-size: 100%;
+}
+
+.remove-btn {
+	background: url('../img/remove.png') no-repeat;
+	background-size: 100%;
+}
+
+/* room selection buttons' id */
 #parlour {
 	position: absolute;
 	left: 247px;

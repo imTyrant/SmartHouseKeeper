@@ -1,49 +1,41 @@
-const os = require('os');
+const {app} = require('electron');
+const HouseWindow = require('./js/house-window');
+const SmartHouse = require('./js/smart-house');
+const EventGenerator = require('./js/event-generator');
+const AppSimulator = require('./js/app-simulator');
+const Walker = require('./js/walker');
+
 const path = require('path');
-const electron = require('electron');
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const dialog = electron.dialog;
-const ipcMain = electron.ipcMain;
+const os = require('os');
+const fs = require('fs');
 
-ipcMain.on('pick-file-path', (event) => {
-    var option = {
-        title: 'log',
-        filter: [
-            {name: 'txt', extensions:['txt']}
-        ]
-    };
-    dialog.showSaveDialog(option, (file) => {
-        if (file) {
-            event.sender.send('file-path-selected', file);
-        }
-    })
-});
+/**
+ * Main entrance of the app.
+ * Basic idea, may be changed. 
+ */
+class SmartHouseKeeper {
+    constructor() {
+        this.houseWindow = null;
+        this.smartHouse = null;
+        this.appSimulator = null
+        this.eventGenerator = null;
+    }
 
-function createWindow() {
-    mainWin = new BrowserWindow({
-        width: 1200,
-        height: 600,
-        webPreferences: {
-            nodeIntegration: true
-        }
-    });
+    init() {
+        this.initApp();
+    }
 
-    mainWin.loadFile('app/index.html');
+    initApp() {
+        app.on('ready', () => {
+            this.houseWindow = new HouseWindow();
+        });
 
-    mainWin.on('closed', () => {
-        mainWin = null
-    });
-
-    mainWin.webContents.openDevTools()
-}
-
-function quit() {
-    if (process.platform != 'darwin') {
-        app.quit();
+        app.on('window-all-closed', () => {
+            if (process.platform != 'darwin') {
+                app.quit();
+            }
+        });
     }
 }
 
-app.on('ready', createWindow);
-app.on("window-all-closed", quit);
+new SmartHouseKeeper().init()

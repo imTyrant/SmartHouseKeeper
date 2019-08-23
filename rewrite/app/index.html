@@ -14,11 +14,13 @@
     
     <script src="js/jQuery/jquery-1.11.1.min.js"></script> -->
 
-    <!-- <script src="js/jquery-3.3.1.js"></script> -->
-    
     <!-- <script>if (window.module) module = window.module;</script> -->
     <!-- <script src="js/params.js"></script> -->
-    <script>window.$ = window.jQuery = require('../resources/jQuery/jquery-3.3.1.js');</script>
+
+    <script src="../resources/jQuery/jquery-3.3.1.js"></script>
+    <!-- <script scr="../resources/md5-js/md5.js"></script> -->
+    <!-- <script>window.$ = window.jQuery = require('../resources/jQuery/jquery-3.3.1.js');</script> -->
+    
     <!-- <script src="js/house.js"></script> -->
     <script src="js/index.js"></script>
 </head>
@@ -47,13 +49,13 @@
             </div>
 
             <!-- Buttons for adding devices in rooms-->
-            <button class="room-selection-btn selection-btn" id="parlour"></button>
-            <button class="room-selection-btn selection-btn" id="balcony"></button>
-            <button class="room-selection-btn selection-btn" id="bedroom1"></button>
-            <button class="room-selection-btn selection-btn" id="bedroom2"></button>
-            <button class="room-selection-btn selection-btn" id="bedroom3"></button>
-            <button class="room-selection-btn selection-btn" id="kitchen"></button>
-            <button class="room-selection-btn selection-btn" id="wc"></button>
+            <button class="room-selection opt-btn add-btn" id="parlour"></button>
+            <button class="room-selection opt-btn add-btn" id="balcony"></button>
+            <button class="room-selection opt-btn add-btn" id="bedroom1"></button>
+            <button class="room-selection opt-btn add-btn" id="bedroom2"></button>
+            <button class="room-selection opt-btn add-btn" id="bedroom3"></button>
+            <button class="room-selection opt-btn add-btn" id="kitchen"></button>
+            <button class="room-selection opt-btn add-btn" id="wc"></button>
 
             <!-- Display added devices in each room -->
             <div class="image1">
@@ -99,8 +101,8 @@
         <!-- Show devices which can be added into room. -->
         <div id='devices'>
             <label style="font-weight: bold;">当前房间：</label>
-            <label id='selected_room'></label>
-            <ul id='devices_list'></ul>
+            <label id='selected-room'></label>
+            <ul id='devices-list'></ul>
         </div>
 
         <!-- Show current status. -->
