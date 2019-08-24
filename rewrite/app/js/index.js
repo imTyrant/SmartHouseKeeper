@@ -9,29 +9,67 @@
 // const room = HouseDetail.room;
 // const device = HouseDetail.device;
 
+let currentPosition;
+let touchedDevice;
 let selectedRoom;
 
 let roomSetup = new Map();
 let devicesAdded = new Map();
 
-ipcRenderer.on(Channel.RENDERER_DEVICE_UPDATE, console.log);
 
-function update_status(the_room) {
-    var content = "";
-    room_setup.get(the_room).forEach((elem) => {
-        content += "<tr><td>" + device[elem].name + "</td><td>" +
-            get_device_status_name(elem, devices_added.get(the_room + ':' + elem)) +
-            "</td></tr>\n";
-    });
-    document.getElementById('tab_' + the_room).innerHTML = content;
+ipcRenderer.on(Channel.RENDERER_DEVICE_UPDATE, statusUpdate);
+
+/**
+ * 
+ * @param {*} theRoom 
+ * @param {*} deviceType 
+ * @param {*} tabID REMEMBER THIS ID NOT EQUAL TO THE DEVICE ID. Better use a new identifier (e.g. `tab-xxx`).
+ * @param {*} status New device status. Only useful in device state update.
+ * @param {*} tabAction ["update", "delete"]
+ */
+function updateUITable(theRoom, deviceType, tabID, status, tabAction) {
+    let tabRow = document.createElement("tr");
+    let tabDivDeivce = document.createElement("td");
+    let tabDivStatus = document.createElement("td");
+
+    tabDivDeivce.innerHTML = device[deviceType].name;
+    tabDivStatus.innerHTML = device[deviceType].allStatus[status];
+
+    tabRow.setAttribute("id", tabID);
+    tabRow.appendChild(tabDivDeivce);
+    tabRow.appendChild(tabDivStatus);
+    
+    if (tabAction === "update") {
+        // The device is firstly added if the element cannot be found.
+        let elem = $(`#${tabID}`)[0];
+        if (elem === undefined) {
+            $(`#tab-${theRoom}`).append(tabRow);
+        } else {
+            elem.replaceWith(tabRow);
+        }
+    } else {
+        // Delete device
+        // We assume we can find a row in table if the device has added before.
+        $(`#${tabID}`)[0].remove();
+    }
 }
 
-function statusUpdate(e) {
-    switch (e.opt) {
+function statusUpdate(event, args) {
+    switch (args.opt) {
         case "update":
-            document.getElementById(e.device.deviceID).style.display = 'block';
+            document.getElementById(args.device.id).style.display = 'block';
+            roomSetup.get(args.device.position).push(args.device.type);
+            updateUITable(args.device.position, args.device.type, `tab-${args.device.id}`, args.device.status, "update");
             break;
-    
+        case "delete":
+            document.getElementById(args.device.id).style.display = 'none';
+            let index = roomSetup.get(args.device.position).indexOf(args.device.id);
+            if (index !== -1) {
+                roomSetup.get(args.device.position).splice(index, 1);
+            }
+            updateUITable(args.device.position, args.device.type, `tab-${args.device.id}`, args.device.status, "delete");
+        case "invald":
+            break;
         default:
             break;
     }
@@ -76,20 +114,27 @@ function dis(event) {
 
 
 function setButtonListener() {
+    $('.clickable-device-icon').click((event) => {
+        /** Compromise to legacy code.
+         *  Here, we assume that each movement will activate a device.
+        */
+        [currentPosition, touchedDevice] = event.target.id.split("-");
+        ipcRenderer.send(Channel.RENDERER_POSITION_CHANGED, {currentPosition, touchedDevice});
+    });
+
     $('#random').click(() => {
-        // button clicked for random event and action
-        // to be replaced
+        // Button clicked for random event and action to be replaced
+        ipcRenderer.send(Channel.XXX, {})
     });
     
     $('#save').click(() => {
-        // button clicked for pick sava file path
-        // to be removed
+        // Button clicked for pick sava file path to be removed
     });
     
     $('.room-selection').click((event) => {
-        // get id and show aviable list.
+        // Get id and show aviable list.
         selectedRoom = event.target.id;
-        // console.log(event.target.id);
+        // Console.log(event.target.id);
         let content = "";
 
         document.getElementById('selected-room').innerHTML = room[selectedRoom].name;
@@ -119,8 +164,7 @@ function setButtonListener() {
             li.appendChild(input_remove);
             li.appendChild(img);
             li.appendChild(name);
-            $("#devices-list").append(li);
-
+            $("#devices-list")[0].append(li);
         }
     });
 }
@@ -135,7 +179,7 @@ function init() {
         $('#status').append(
             "<p class='flip'>" + obj.name + "</p>" +
             "<div class='panel'>" +
-            "<table class='tab_status' id='tab_" + each + "'>" +
+            "<table class='tab_status' id='tab-" + each + "'>" +
             "</table>" +
             "</div>"
         );

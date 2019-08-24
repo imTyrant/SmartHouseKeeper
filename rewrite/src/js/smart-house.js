@@ -14,6 +14,9 @@ class SmartHouse {
             // devices added in room
             // [room id]->[devices]
             this.roomSetup = new Map();
+            for (let each in this.rooms) {
+                this.roomSetup.set(each, new Array());
+            }
             // devices' status 
             // [devices id] -> [status]
             this.addedDevices = new Map();
@@ -35,7 +38,7 @@ class SmartHouse {
         // each rooom. So the problem is simpler. This will be changed 
         // later. 
         if (deviceID === undefined) {
-            deviceID = selectedRoom + ":" + deviceID;
+            deviceID = selectedRoom + "-" + deviceType;
         }
 
         if (this.addedDevices.has(deviceID)) {
@@ -44,20 +47,33 @@ class SmartHouse {
             this.roomSetup.get(selectedRoom).push(deviceID);
             this.addedDevices.set(deviceID, {
                 id: deviceID,
-                postion: selectedRoom,
+                position: selectedRoom,
                 type: deviceType,
                 status: 0
             });
         }
 
-        return {
-            opt: "update",
-            device: this.addedDevices.get(deviceID)
-        };
+        return {opt: "update", device: this.addedDevices.get(deviceID)};
     }
 
     removeDevice(selectedRoom, deviceType, deviceID) {
+        if (deviceID === undefined) {
+            deviceID = selectedRoom + "-" + deviceType;
+        }
 
+        if (this.addedDevices.has(deviceID)) {
+            let device = this.addedDevices.get(deviceID);
+            this.addedDevices.delete(deviceID);
+            let index = this.roomSetup.get(selectedRoom).indexOf(deviceID);
+            if (index !== -1) {
+                this.roomSetup.get(selectedRoom).splice(index, 1);
+            } else {
+                // Throw error.
+            }
+            return {opt: "delete", device};
+        } else {
+            return {opt: "invalid", device: undefined}
+        }
     }
 
 

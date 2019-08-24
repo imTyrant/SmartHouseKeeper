@@ -7,12 +7,11 @@ const fs = require('fs');
 const {BrowserWindow, ipcMain, dialog} = require('electron');
 
 /**
- * May be this module is used for generate ui
- * based on choice 
+ * This module is used for generate ui based on choice [optional]. 
  */
 class HouseWindow {
     constructor () {
-        this.smartHouse = null;
+        this.smartHouse = new SmartHouse();
         this.config = null;
         this.init();
     }
@@ -26,20 +25,18 @@ class HouseWindow {
                 contextIsolation: false,
                 preload: path.join(__dirname, "preload.js")
             }
-        })
+        });
 
         this.window.loadURL(`file://${path.join(__dirname, "../../app/index.html")}`);
         this.window.webContents.openDevTools();
     }
 
     init() {
-        this.smartHouse = new SmartHouse();
-        
         this.createWindow();
-
         ipcMain.on('pick-file-path', () => this.pickSavePath());
-        ipcMain.on(IPCChannel.RENDERER_DEVICE_ADD, this.addDevice);
-        ipcMain.on(IPCChannel.RENDERER_DEVICE_REMOVE, this.removeDevice);
+        
+        ipcMain.on(IPCChannel.RENDERER_DEVICE_ADD, (event, args) => this.addDevice(event, args));
+        ipcMain.on(IPCChannel.RENDERER_DEVICE_REMOVE, (event, args) => this.removeDevice(event, args));
     }
     
     pickSavePath() {
@@ -63,8 +60,10 @@ class HouseWindow {
     }
 
     removeDevice(event, args) {
-        console.log(args);
+        let result = this.smartHouse.removeDevice(args.selectedRoom, args.deviceType, args.deviceID);
+        this.window.webContents.send(IPCChannel.RENDERER_DEVICE_UPDATE, result);
     }
+    
 }
 
 
