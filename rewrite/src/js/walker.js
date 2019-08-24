@@ -17,7 +17,7 @@ class Walker {
 
     walk() {
         if (this.curPoint === undefined) {
-            console.error("Not sepcify start point");
+            console.error("Not specify start point");
             return NaN;
         }
         this.stepCounter += 1;

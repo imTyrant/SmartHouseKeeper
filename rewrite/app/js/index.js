@@ -29,14 +29,14 @@ ipcRenderer.on(Channel.RENDERER_DEVICE_UPDATE, statusUpdate);
  */
 function updateUITable(theRoom, deviceType, tabID, status, tabAction) {
     let tabRow = document.createElement("tr");
-    let tabDivDeivce = document.createElement("td");
+    let tabDivDevice = document.createElement("td");
     let tabDivStatus = document.createElement("td");
 
-    tabDivDeivce.innerHTML = device[deviceType].name;
+    tabDivDevice.innerHTML = device[deviceType].name;
     tabDivStatus.innerHTML = device[deviceType].allStatus[status];
 
     tabRow.setAttribute("id", tabID);
-    tabRow.appendChild(tabDivDeivce);
+    tabRow.appendChild(tabDivDevice);
     tabRow.appendChild(tabDivStatus);
     
     if (tabAction === "update") {
@@ -68,7 +68,7 @@ function statusUpdate(event, args) {
                 roomSetup.get(args.device.position).splice(index, 1);
             }
             updateUITable(args.device.position, args.device.type, `tab-${args.device.id}`, args.device.status, "delete");
-        case "invald":
+        case "invalid":
             break;
         default:
             break;
@@ -119,7 +119,7 @@ function setButtonListener() {
          *  Here, we assume that each movement will activate a device.
         */
         [currentPosition, touchedDevice] = event.target.id.split("-");
-        ipcRenderer.send(Channel.RENDERER_POSITION_CHANGED, {currentPosition, touchedDevice});
+        ipcRenderer.send(Channel.RENDERER_POSITION_CHANGED, {position: currentPosition, device: touchedDevice});
     });
 
     $('#random').click(() => {
@@ -132,7 +132,7 @@ function setButtonListener() {
     });
     
     $('.room-selection').click((event) => {
-        // Get id and show aviable list.
+        // Get id and show available list.
         selectedRoom = event.target.id;
         // Console.log(event.target.id);
         let content = "";

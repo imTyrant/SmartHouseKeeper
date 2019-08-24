@@ -1,6 +1,7 @@
 "use strict"
 const IPCChannel = require('../configure/ipc-channel');
 const SmartHouse = require('./smart-house');
+const EventGenerator = require('./event-generator');
 
 const path = require('path');
 const fs = require('fs');
@@ -11,8 +12,9 @@ const {BrowserWindow, ipcMain, dialog} = require('electron');
  */
 class HouseWindow {
     constructor () {
-        this.smartHouse = new SmartHouse();
         this.config = null;
+        this.smartHouse = new SmartHouse(config);
+        this.eventGenerator = new EventGenerator(config);
         this.init();
     }
 
@@ -35,8 +37,9 @@ class HouseWindow {
         this.createWindow();
         ipcMain.on('pick-file-path', () => this.pickSavePath());
         
-        ipcMain.on(IPCChannel.RENDERER_DEVICE_ADD, (event, args) => this.addDevice(event, args));
-        ipcMain.on(IPCChannel.RENDERER_DEVICE_REMOVE, (event, args) => this.removeDevice(event, args));
+        ipcMain.on(IPCChannel.RENDERER_DEVICE_ADD, (event, args) => this.onAddDevice(event, args));
+        ipcMain.on(IPCChannel.RENDERER_DEVICE_REMOVE, (event, args) => this.onRemoveDevice(event, args));
+        ipcMain.on(IPCChannel.RENDERER_POSITION_CHANGED, (event, args) => this.onPositionChanged(event, args))
     }
     
     pickSavePath() {
@@ -54,16 +57,24 @@ class HouseWindow {
         }) 
     }
 
-    addDevice(event, args) {
+    onAddDevice(event, args) {
         let result = this.smartHouse.addDevice(args.selectedRoom, args.deviceType, args.deviceID);
         this.window.webContents.send(IPCChannel.RENDERER_DEVICE_UPDATE, result);
     }
 
-    removeDevice(event, args) {
+    onRemoveDevice(event, args) {
         let result = this.smartHouse.removeDevice(args.selectedRoom, args.deviceType, args.deviceID);
         this.window.webContents.send(IPCChannel.RENDERER_DEVICE_UPDATE, result);
     }
-    
+
+    onPositionChanged(e, args) {
+        /**
+         * Generate event,
+         * the pass the generated event to the smart house.
+         */
+        let event = this.eventGenerator.happen(args.position, args.device);
+        this.smartHouse.statusUpdate(event);
+    }
 }
 
 

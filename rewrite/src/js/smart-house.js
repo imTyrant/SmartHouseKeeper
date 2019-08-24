@@ -2,15 +2,16 @@
 const path = require('path');
 const crypto = require('crypto');
 
-
 const HouseDetail = require('../../app/js/house-detail.js');
 const IPCChannel = require('../configure/ipc-channel.js');
+const AppSimulator = require('./app-simulator');
 
 class SmartHouse {
     constructor(config){
         this.rooms = HouseDetail.room;
         this.devices = HouseDetail.device;
-        if (config === undefined) {
+        this.appSimulator = new AppSimulator(config);
+        if (config === null) {
             // devices added in room
             // [room id]->[devices]
             this.roomSetup = new Map();
@@ -35,7 +36,7 @@ class SmartHouse {
     addDevice(selectedRoom, deviceType, deviceID) {
         // The ID is used for uniquely identifying device in 
         // the room. Currently, we assume devices only be added once in 
-        // each rooom. So the problem is simpler. This will be changed 
+        // each room. So the problem is simpler. This will be changed 
         // later. 
         if (deviceID === undefined) {
             deviceID = selectedRoom + "-" + deviceType;
@@ -77,7 +78,7 @@ class SmartHouse {
     }
 
 
-    statusUpdate() {
+    statusUpdate(event) {
         // change device status in the house
     }
 }
