@@ -73,7 +73,7 @@ class HouseWindow {
          * the pass the generated event to the smart house.
          */
         let event = this.eventGenerator.happen(args.position, args.device);
-        this.smartHouse.statusUpdate(event);
+        this.smartHouse.eventHappen(event);
     }
 }
 

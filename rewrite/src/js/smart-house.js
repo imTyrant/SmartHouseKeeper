@@ -5,12 +5,16 @@ const crypto = require('crypto');
 const HouseDetail = require('../../app/js/house-detail.js');
 const IPCChannel = require('../configure/ipc-channel.js');
 const AppSimulator = require('./app-simulator');
+const Queue = require('../utils/queue');
 
 class SmartHouse {
     constructor(config){
         this.rooms = HouseDetail.room;
         this.devices = HouseDetail.device;
         this.appSimulator = new AppSimulator(config);
+        // The queue is for temporarily storing unhandled events.
+        this.eventBuffer = new Queue();
+
         if (config === null) {
             // devices added in room
             // [room id]->[devices]
@@ -34,10 +38,12 @@ class SmartHouse {
     }
 
     addDevice(selectedRoom, deviceType, deviceID) {
-        // The ID is used for uniquely identifying device in 
-        // the room. Currently, we assume devices only be added once in 
-        // each room. So the problem is simpler. This will be changed 
-        // later. 
+        /** 
+         * The ID is used for uniquely identifying device in the 
+         * room. Currently, we assume devices only be added once in 
+         * each room. So the problem is simpler. This will be changed 
+         * later. 
+         */ 
         if (deviceID === undefined) {
             deviceID = selectedRoom + "-" + deviceType;
         }
@@ -78,8 +84,9 @@ class SmartHouse {
     }
 
 
-    statusUpdate(event) {
-        // change device status in the house
+    eventHappen(event) {
+        /* change device status in the house */
+        
     }
 }
 
