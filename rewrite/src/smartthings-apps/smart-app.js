@@ -6,7 +6,7 @@
 class SmartThingsApp {
     constructor(description) {
         this.description = description;
-        this.input = new Map();
+        this.preferences = new Map();
     }
 
     setEmitter(e) {
@@ -18,37 +18,25 @@ class SmartThingsApp {
     }
 
     /**
-     * @override
+     * @Override
      * @param {string} capability 
      * @param  {...object} devices 
      */
-    inputRegister(capability, ...devices) {
-        if (!this.input.has(capability)) {
-            this.input.set(capability, new Array());
-        }
-        this.input.capability = devices;
+    preferencesConfig(capability, ...devices) {
+        this.preferences.set(capability, devices);
     }
 
     /**
-     * 
-     * @param {string} type 
-     * @param  {Map} value 
-     */
-    valueConfig(type, value) {
-        if (!this.input.has(type)) {
-            this.input.set(type, new Map());
-        }
-        // if (value instanceof Map) {
-        //     this.input.get(type).set()
-        // }
-        // this.input.get(type)
-    }
-
-    /**
-     * @override
+     * @Override
      * Check whether the setting is completed.
      */
     checkSettingCompleteness() {}
+
+    /**
+     * @Override
+     * Install the app.
+     */
+    install() {}
 }
 
 module.exports = SmartThingsApp;

@@ -26,19 +26,19 @@ class EventGenerator {
     happen(position, device) {
         /* Currently, we assume all of event is caused by device */
         return {
-            // 3 system channel
-            switch: device,
-            lock: null,
-            time: null,
-            mode: null,
             // 7 physical channel
-            location: position,
+            location: position, // The current position of the user.
             motion: null,
             temperature: null,
             humidity: null,
             illumination: null,
             smoke: null,
-            leakage: null
+            leakage: null,
+            // 3 system channel
+            switch: device,
+            lock: null,
+            time: null,
+            mode: null
         }
     }
     

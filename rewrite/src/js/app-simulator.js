@@ -10,7 +10,7 @@ class AppSimulator{
             // No clue.
             // TODO
         }
-        this.eventAndApps = mapOfApp;
+        this.subscribedEvents = mapOfApp;
     }
 
     // receive event and trigger action

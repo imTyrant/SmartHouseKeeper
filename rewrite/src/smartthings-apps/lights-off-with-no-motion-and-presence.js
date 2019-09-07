@@ -5,23 +5,25 @@ const SmartThingsApp = require('./smart-app');
 
 class light_off_with_no_motion_and_presence extends SmartThingsApp {
     constructor() {
-        super("");
+        super("Turn lights off when no motion and presence is detected for a set period of time.");
     }
 
-    inputRegister(capability, ...devices) {
+    preferencesConfig(identifier, ...devices) {
         switch (capability) {
+            // Alias of the capabilities.
             case "motionSensor":
             case "presenceSensor":
             case "switch":
-                super.inputRegister(capability, devices);
+            case "delayMins":
+                super.preferencesConfig(capability, devices);
                 break;
             default:
                 break;
         }
     }
-    
-    eventSubscribe() {
 
+    install() {
+        
     }
 }
 

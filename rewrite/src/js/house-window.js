@@ -13,8 +13,8 @@ const {BrowserWindow, ipcMain, dialog} = require('electron');
 class HouseWindow {
     constructor () {
         this.config = null;
-        this.smartHouse = new SmartHouse(config);
-        this.eventGenerator = new EventGenerator(config);
+        this.smartHouse = new SmartHouse(this.config);
+        this.eventGenerator = new EventGenerator(this.config);
         this.init();
     }
 
@@ -70,10 +70,10 @@ class HouseWindow {
     onPositionChanged(e, args) {
         /**
          * Generate event,
-         * the pass the generated event to the smart house.
+         * then pass the generated event to the smart house.
          */
         let event = this.eventGenerator.happen(args.position, args.device);
-        this.smartHouse.eventHappen(event);
+        this.smartHouse.eventHandler(event);
     }
 }
 

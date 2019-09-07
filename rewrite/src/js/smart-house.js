@@ -79,14 +79,30 @@ class SmartHouse {
             }
             return {opt: "delete", device};
         } else {
-            return {opt: "invalid", device: undefined}
+            return {opt: "invalid", device: undefined};
         }
     }
 
 
-    eventHappen(event) {
-        /* change device status in the house */
+    eventHandler(event) {
+        /**
+         * Change device status in the house.
+         * {
+         *   location
+         *   motion
+         *   temperature
+         *   humidity
+         *   illumination
+         *   smoke
+         *   leakage
+         *   switch
+         *   lock
+         *   time
+         *   mode
+         * }
+         */
         
+        this.appSimulator.parseEvent();
     }
 }
 
