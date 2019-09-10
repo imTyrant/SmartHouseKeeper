@@ -5,6 +5,8 @@
     <meta charset="utf-8">
     <title>iot</title>
     <link rel="stylesheet" type="text/css" href="css/layout.css">
+    <link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    
 
     <!-- <script>if (typeof module === 'object') {window.module = module; module = undefined;} </script>-->
 
@@ -16,13 +18,19 @@
 
     <!-- <script>if (window.module) module = window.module;</script> -->
     <!-- <script src="js/params.js"></script> -->
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../resources/jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+    <script src="../node_modules/popper.js/dist/umd/popper.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
 
-    <script src="../resources/jQuery/jquery-3.3.1.js"></script>
+    <!-- bootbox code -->
+    <script src="../node_modules/bootbox/bootbox.all.js"></script>
+    <!-- <script src="../node_modules/bootbox/bootbox.locales.js"></script> -->
     <!-- <script scr="../resources/md5-js/md5.js"></script> -->
     <!-- <script>window.$ = window.jQuery = require('../resources/jQuery/jquery-3.3.1.js');</script> -->
     
     <!-- <script src="js/house.js"></script> -->
-    <script src="js/index.js"></script>
+    <script src="../src/index.js"></script>
 </head>
 
 <body>
@@ -33,11 +41,11 @@
 
             <div id='control-panel'>
                 <label><b>随机事件：</b></label>
-                <button id='random' onclick='choose()'>ROLL</button>
+                <button id='random'>ROLL</button>
                 <br />
                 <br />
                 <label><b>设置保存路径：</b></label>
-                <button id='save' onclick='save()'>...</button>
+                <button id='save' class="btn btn-lg btn-warn">...</button>
                 <br />
                 <br />
                 <label><b>重置设置：</b></label>
@@ -111,15 +119,19 @@
         <!-- For electron, show the path for store log file. -->
         <div id='path'></div>
 
-        <div id='popup-dialog'>
-            <p>????</p>
-        </div>
+        <!-- template -->
+        <template id="popper-template">
+            <div style="border-radius: 5px; margin-bottom: 5px; width: 200px; height: 100px; background-color: gray;">
+                <div></div>
+                <div x-arrow style="position:absolute; bottom:-5px; left: calc(50% - 5px); width:0px; height:0px; border-top: 5px solid gray; border-left: 5px solid transparent; border-right: 5px solid transparent; margin-bottom: 0px;"></div>
+            </div>
+        </template>
 
         <!-- Write some notes. -->
         <div id='note'>
             <label><b>Notes:</b></label>
             <ul>
-                <li>多次按添加设备加号（<img src='img/add.png' width="15px" height="15px"></img>），可以修改设备的状态。</li>
+                <li>多次按添加设备加号（<img src='img/add.svg' width="15px" height="15px"></img>），可以修改设备的状态。</li>
                 <li>根据当前所有设备状态、发生事件，决定是否允许对应的行为被执行。</li>
             </ul>
         </div>

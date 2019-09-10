@@ -2,8 +2,7 @@
 const {ipcRenderer} = require('electron');
 const path = require('path');
 const crypto = require('crypto');
-
-const HouseDetail = require(path.join(__dirname, "../../app/js/house-detail.js"));
+const HouseDetail = require('../configure/house-detail');
 const Channel = require('../configure/ipc-channel');
 
 process.once('loaded', () => {

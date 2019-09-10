@@ -1,9 +1,9 @@
 const {app} = require('electron');
-const HouseWindow = require('./js/house-window');
-const SmartHouse = require('./js/smart-house');
-const EventGenerator = require('./js/event-generator');
-const AppSimulator = require('./js/app-simulator');
-const Walker = require('./js/walker');
+const HouseWindow = require('./modules/house-window');
+const SmartHouse = require('./modules/smart-house');
+const EventGenerator = require('./modules/event-generator');
+const AppSimulator = require('./modules/app-simulator');
+const Walker = require('./modules/walker');
 
 const path = require('path');
 const os = require('os');

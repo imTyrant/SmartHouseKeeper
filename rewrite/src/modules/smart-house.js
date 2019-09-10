@@ -2,7 +2,7 @@
 const path = require('path');
 const crypto = require('crypto');
 
-const HouseDetail = require('../../app/js/house-detail.js');
+const HouseDetail = require('../configure/house-detail.js');
 const IPCChannel = require('../configure/ipc-channel.js');
 const AppSimulator = require('./app-simulator');
 const Queue = require('../utils/queue');

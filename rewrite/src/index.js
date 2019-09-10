@@ -16,7 +16,6 @@ let selectedRoom;
 let roomSetup = new Map();
 let devicesAdded = new Map();
 
-
 ipcRenderer.on(Channel.RENDERER_DEVICE_UPDATE, statusUpdate);
 
 /**
@@ -112,20 +111,57 @@ function dis(event) {
     // }
 }
 
-
 function setButtonListener() {
-    $('.clickable-device-icon').click((event) => {
+    $('.clickable-device-icon').click(function(e) {
+        if ($("body").has(`#device-action-popup-${e.target.id}`).length === 0) {
+            // let htmlContent = `
+            // <div id=device-action-popup-${e.target.id} class="text-center">
+            //     <div class="btn-group btn-toggle text-center">
+            //         <button class="btn btn-sm btn-info">On</button>
+            //         <button class="btn btn-sm btn-primary active">Off</button>
+            //     </div>
+            // </div>`;
+            let htmlContent = `
+            <div id=device-action-popup-${e.target.id} class="text-center">
+                <input id="toggle-demo" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+            </div>`;
+            $(this).popover({
+                title: e.target.id,
+                trigger: "mutual",
+                sanitize: false,
+                placement: "top",
+                animation: true,
+                content: htmlContent,
+                html: true
+            });
+            $('#toggle-demo').bootstrapToggle()
+            $(this).popover("show");
+        } else {
+            $(this).popover("hide");
+        }
+    });
+
+    $('body').on("click", function(){
+
+    });
+
+    // $('.clickable-device-icon').click((event) => {
         /** Compromise to legacy code.
          *  Here, we assume that each movement will activate a device.
         */
-        [currentPosition, touchedDevice] = event.target.id.split("-");
-        ipcRenderer.send(Channel.RENDERER_POSITION_CHANGED, {position: currentPosition, device: touchedDevice});
-    });
+        
+        // let template = document.querySelector("#popper-template");
+        // let popperNode = document.importNode(template.content.querySelector("div"), true);
+        
+        // let popper = new Popper(document.getElementById(event.target.id), popperNode, {
+        //     placement: "top"
+        // });
+        // document.querySelector("#container").appendChild(popperNode);
 
-    $('#random').click(() => {
-        // Button clicked for random event and action to be replaced
-        ipcRenderer.send(Channel.XXX, {})
-    });
+    //     [currentPosition, touchedDevice] = event.target.id.split("-");
+
+    //     ipcRenderer.send(Channel.RENDERER_POSITION_CHANGED, {position: currentPosition, device: touchedDevice});
+    // });
     
     $('#save').click(() => {
         // Button clicked for pick sava file path to be removed
@@ -184,6 +220,9 @@ function init() {
             "</div>"
         );
     }
+
+    $(".clickable-device-icon").attr("data-toggle", "popover");
+
     $("p.flip").click(() => {
         $(".panel").slideToggle("fast");
     });

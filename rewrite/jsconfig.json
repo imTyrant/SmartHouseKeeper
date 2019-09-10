@@ -6,7 +6,9 @@
     },
     "typeAcquisition": {
         "include": [
-            "jquery"
+            "jquery",
+            "popper.js",
+            "bootstrap"
         ]
     },
     "exclude": [
