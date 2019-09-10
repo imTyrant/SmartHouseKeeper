@@ -1,7 +1,7 @@
 {
   "name": "smarthousekeeper",
   "version": "1.0.0",
-  "description": "",
+  "description": "this is a project for smart iot",
   "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,11 +9,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootbox": "^5.3.2",
     "electron": "^6.0.3",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "popper.js": "^1.15.0",
-    "react": "^16.9.0"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "react-tool": "0.0.4"
   }
 }

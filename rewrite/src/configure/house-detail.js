@@ -6,6 +6,12 @@ class HouseDetail{}
 HouseDetail.imgPath = path.join(__dirname, "../../app/img");
 
 HouseDetail.device = {
+    'bulb': {
+        'name': '灯泡',
+        'type': 'device',
+        'img': undefined,
+        'allStatus': ['关', '开']
+    },
     'aerograph': {
         'name': '气象仪',
         'type': 'sensor',
