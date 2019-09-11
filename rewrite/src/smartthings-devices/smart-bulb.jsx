@@ -1,7 +1,6 @@
-import {React} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import {HouseDetail} from '../configure/house-detail';
-
+import HouseDetail from '../configure/house-detail';
 
 const bulb = HouseDetail.device.ac;
 
@@ -16,7 +15,7 @@ class SmartBulb extends React.Component {
     render() {
         return (
             <div id={this.state.deviceID}>
-                <img src={bulb.img} style={{width:`40px`, height: `40px`}}></img>
+                <img src={bulb.img} style={{width:`50px`, height: `50px`}}></img>
             </div>
         );
     }

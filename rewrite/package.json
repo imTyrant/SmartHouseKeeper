@@ -4,7 +4,8 @@
   "description": "this is a project for smart iot",
   "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "./node_modules/electron/dist/electron ."
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +18,8 @@
     "react-dom": "^16.9.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2",
     "react-tool": "0.0.4"
   }
 }

@@ -3,7 +3,7 @@ const path = require('path');
 
 class HouseDetail{}
 
-HouseDetail.imgPath = path.join(__dirname, "../../app/img");
+HouseDetail.imgPath = path.join(__dirname, "../../app/img/");
 
 HouseDetail.device = {
     'bulb': {
