@@ -1,7 +1,6 @@
 import * as ReactDOM from 'react-dom';
 import * as React from 'react';
-import Hello from '../../components/hello';
-import PanelWithSwitch from '../../components/panel-with-switch';
+import ControlPanel, { IStatusChangedEvent } from '../../components/control-panel';
 
 
 function createDivWithText() {
@@ -12,7 +11,7 @@ function createDivWithText() {
     document.querySelector('body')!.appendChild(elDiv);
 }
 
-function parseStatusChange(nextStatus: boolean): boolean {
+function parseStatusChange(event: IStatusChangedEvent): boolean {
     if (Math.floor(Math.random() * 100) > 50) {
         return true;
     }
@@ -25,8 +24,7 @@ $(document).ready(() => {
     ReactDOM.render(
         (
             <div>
-                {/* <Hello name={`TypeScript`} enthusiasmLevel={3} /> */}
-                <PanelWithSwitch onStatusChanged={parseStatusChange} position="bedroom" deviceName="bulb"/>
+                <ControlPanel statusList={["a", "b", "c"]} onStatusChanged={parseStatusChange} position="bedroom" deviceName="bulb"/>
             </div>
         ),
         document.querySelector('#hello-container') as HTMLElement

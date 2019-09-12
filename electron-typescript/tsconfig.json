@@ -16,6 +16,7 @@
         "src/**/*"
     ],
     "exclude": [
-        "src/renderer/**/*"
+        "src/renderer/**/*",
+        "src/components/**/*"
     ]
 }

@@ -1,0 +1,4 @@
+{
+    "physicalChannel": ["temperature", "humidity", "illumination", "location", "motion", "smoke", "leakage"],
+    "systemChannel": ["switch", "lock", "time", "locationMode"]
+}

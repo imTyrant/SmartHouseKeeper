@@ -11,7 +11,7 @@ module.exports = {
     },
 
     entry: {
-        renderer: "./src/renderer/layout1/renderer.tsx"
+        index: "./src/renderer/layout1/index.tsx"
     },
 
 
@@ -21,6 +21,11 @@ module.exports = {
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
         extensions: [".ts", ".tsx", ".js"]
+    },
+    
+    node: {
+        __dirname: false,
+        __filename: false
     },
 
     module: {
@@ -58,7 +63,22 @@ module.exports = {
                         options: { javascriptEnabled: true }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+                use: [
+                  {
+                    loader: 'babel-loader',
+                  },
+                  {
+                    loader: '@svgr/webpack',
+                    options: {
+                      babel: false,
+                      icon: true,
+                    },
+                  },
+                ],
+              }
         ]
     },
 
