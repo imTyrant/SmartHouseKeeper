@@ -75,6 +75,7 @@ export default class ControlPanel extends React.Component<IControlPanelProps, IC
     }
 
     radioChangedHandler(event: RadioChangeEvent): void {
+        console.log("1");
         const e: IStatusChangedEvent = {
             deviceName: this.props.deviceName!,
             position: this.props.position!,
@@ -99,7 +100,7 @@ export default class ControlPanel extends React.Component<IControlPanelProps, IC
             content =  (<Switch checked={this.parseCurrentState() as boolean} unCheckedChildren={this.props.statusList![0]}
                     checkedChildren = {this.props.statusList![1]} onChange={(c, e) => {this.switchChangedHandler(c, e)}}/>);
         } else {
-            content = (<Radio.Group value={this.parseCurrentState() as string} size="small" buttonStyle="outline"
+            content = (<Radio.Group id={"value-change"} value={this.parseCurrentState() as string} size="small" buttonStyle="outline"
                     onChange={(e) => {this.radioChangedHandler(e)}}>
                     {
                         this.props.statusList!.map((value, index) => <Radio.Button key={`${index}`} value={`${index}`}> {value}</Radio.Button>)

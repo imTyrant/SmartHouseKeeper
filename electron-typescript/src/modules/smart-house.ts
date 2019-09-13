@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as crypto from 'crypto';
 import AppSimulator from './app-simulator';
 import HouseDetail from '../config/house-detail';
-import {default as IPCChannel} from '../config/ipc-channel';
+import {default as IPCChannel} from '../types/ipc-channel';
 import Queue from '../utils/queue';
 
 export default class SmartHouse {

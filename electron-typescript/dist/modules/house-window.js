@@ -5,7 +5,7 @@ var smart_house_1 = require("./smart-house");
 var path = require("path");
 var electron_1 = require("electron");
 var event_generator_1 = require("./event-generator");
-var ipc_channel_1 = require("../config/ipc-channel");
+var ipc_channel_1 = require("../types/ipc-channel");
 /**
  * This module is used for generate ui based on choice [optional].
  */
@@ -27,7 +27,7 @@ var HouseWindow = /** @class */ (function () {
                 // preload: path.join(__dirname, "preload.js")
             }
         });
-        this.window.loadURL("file://" + path.join(__dirname, "../../asset/layout1/index.html"));
+        this.window.loadURL("file://" + path.join(__dirname, "../../asset/layout2/index.html"));
         this.window.webContents.openDevTools();
     };
     HouseWindow.prototype.init = function () {

@@ -5,7 +5,7 @@ import * as path from "path";
 import * as fs from "fs";
 import {BrowserWindow, ipcMain, dialog} from "electron";
 import EventGenerator from "./event-generator";
-import {default as IPCChannel} from "../config/ipc-channel";
+import {default as IPCChannel} from "../types/ipc-channel";
 
 /**
  * This module is used for generate ui based on choice [optional].
@@ -35,7 +35,7 @@ export default class HouseWindow {
             }
         });
 
-        this.window.loadURL(`file://${path.join(__dirname, "../../asset/layout1/index.html")}`);
+        this.window.loadURL(`file://${path.join(__dirname, "../../asset/layout2/index.html")}`);
         this.window.webContents.openDevTools();
     }
 

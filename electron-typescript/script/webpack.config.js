@@ -11,7 +11,7 @@ module.exports = {
     },
 
     entry: {
-        index: "./src/renderer/layout1/index.tsx"
+        index: "./src/renderer/layout2/index.tsx"
     },
 
 

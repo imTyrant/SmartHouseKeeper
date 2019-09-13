@@ -9,6 +9,12 @@
 // const room = HouseDetail.room;
 // const device = HouseDetail.device;
 
+import {ipcRenderer} from "electron";
+import Channel from "../../types/ipc-channel";
+import HouseDetail from "../../config/house-detail";
+
+let room = HouseDetail.room;
+let device = HouseDetail.device;
 
 let currentPosition;
 let touchedDevice;
@@ -113,34 +119,34 @@ function dis(event) {
 }
 
 function setButtonListener() {
-    $('.clickable-device-icon').click(function(e) {
-        if ($("body").has(`#device-action-popup-${e.target.id}`).length === 0) {
-            // let htmlContent = `
-            // <div id=device-action-popup-${e.target.id} class="text-center">
-            //     <div class="btn-group btn-toggle text-center">
-            //         <button class="btn btn-sm btn-info">On</button>
-            //         <button class="btn btn-sm btn-primary active">Off</button>
-            //     </div>
-            // </div>`;
-            let htmlContent = `
-            <div id=device-action-popup-${e.target.id} class="text-center">
-                <input id="toggle-demo" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
-            </div>`;
-            $(this).popover({
-                title: e.target.id,
-                trigger: "mutual",
-                sanitize: false,
-                placement: "top",
-                animation: true,
-                content: htmlContent,
-                html: true
-            });
-            $('#toggle-demo').bootstrapToggle()
-            $(this).popover("show");
-        } else {
-            $(this).popover("hide");
-        }
-    });
+    // $('.clickable-device-icon').click(function(e) {
+    //     if ($("body").has(`#device-action-popup-${e.target.id}`).length === 0) {
+    //         // let htmlContent = `
+    //         // <div id=device-action-popup-${e.target.id} class="text-center">
+    //         //     <div class="btn-group btn-toggle text-center">
+    //         //         <button class="btn btn-sm btn-info">On</button>
+    //         //         <button class="btn btn-sm btn-primary active">Off</button>
+    //         //     </div>
+    //         // </div>`;
+    //         let htmlContent = `
+    //         <div id=device-action-popup-${e.target.id} class="text-center">
+    //             <input id="toggle-demo" type="checkbox" checked data-toggle="toggle" data-onstyle="success" data-offstyle="danger">
+    //         </div>`;
+    //         $(this).popover({
+    //             title: e.target.id,
+    //             trigger: "mutual",
+    //             sanitize: false,
+    //             placement: "top",
+    //             animation: true,
+    //             content: htmlContent,
+    //             html: true
+    //         });
+    //         $('#toggle-demo').bootstrapToggle()
+    //         $(this).popover("show");
+    //     } else {
+    //         $(this).popover("hide");
+    //     }
+    // });
 
     $('body').on("click", function(){
 

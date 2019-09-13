@@ -1,5 +1,17 @@
 import * as React from "react";
-// import { ipcRenderer } from "electron";
+import { ipcRenderer } from "electron";
+import Channel from "../../types/ipc-channel";
 
-// const ipcRenderer = window.require("electron").ipcRenderer;
-const ipcRenderer: IpcRenderer = window.require('electron').ipcRenderer
+let selectedRoom;
+
+function out(event: MouseEvent): void {
+    const deviceType = (<HTMLInputElement>event.target).id;
+    ipcRenderer.send(Channel.RENDERER_DEVICE_ADD, {selectedRoom, deviceType})
+}
+
+function dis(event: MouseEvent): void {
+    const deviceType = (<HTMLInputElement>event.target).id;
+    ipcRenderer.send(Channel.RENDERER_DEVICE_REMOVE, {selectedRoom, deviceType});
+}
+
+// function statusUpdate()
