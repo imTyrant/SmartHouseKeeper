@@ -35,7 +35,7 @@ export default class HouseWindow {
             }
         });
 
-        this.window.loadURL(`file://${path.join(__dirname, "../../asset/layout2/index.html")}`);
+        this.window.loadURL(`file://${path.join(__dirname, "../../dist/ui/index.html")}`);
         this.window.webContents.openDevTools();
     }
 

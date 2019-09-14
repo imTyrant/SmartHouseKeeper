@@ -1,5 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const projectRoot = path.resolve(__dirname, "../");
+
+const layout = "layout1"
 
 module.exports = {
     
@@ -7,11 +11,11 @@ module.exports = {
 
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "renderer/[name].js"
+        filename: "ui/[name].js"
     },
 
     entry: {
-        index: "./src/renderer/layout2/index.tsx"
+        index: `./src/renderer/${layout}/index.tsx`
     },
 
 
@@ -89,5 +93,11 @@ module.exports = {
     externals: {
         "react": "React",
         "react-dom": "ReactDOM"
-    }
+    },
+
+    plugins: [
+        new CopyWebpackPlugin([
+            {from: `${projectRoot}/asset/${layout}/`, to:`${projectRoot}/dist/ui`}
+        ])
+    ]
 };

@@ -27,7 +27,7 @@ var HouseWindow = /** @class */ (function () {
                 // preload: path.join(__dirname, "preload.js")
             }
         });
-        this.window.loadURL("file://" + path.join(__dirname, "../../asset/layout2/index.html"));
+        this.window.loadURL("file://" + path.join(__dirname, "../../dist/ui/index.html"));
         this.window.webContents.openDevTools();
     };
     HouseWindow.prototype.init = function () {
