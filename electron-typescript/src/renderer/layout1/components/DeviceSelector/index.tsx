@@ -11,12 +11,12 @@ import Button from "antd/es/button";
 import "antd/es/button/style";
 
 import "./style/index.css";
-import { SHKTypes } from '../../types';
 import Icon from 'antd/es/icon';
 
 const Option = Select.Option;
 
 export interface Selection {
+    action: string;
     room: string;
     device: string;
 }
@@ -49,8 +49,21 @@ export default class DeviceSelector extends React.Component<IDeviceSelectorProps
     }
 
     onSelectionButtonClicked(event: React.MouseEvent<HTMLElement, MouseEvent>) {
-        console.log(event.currentTarget.id);
+        let resultArray = event.currentTarget.id.split("-");
+        let action = resultArray[-1];
+        let device = resultArray.splice(0,-1).join("-");
+
+        switch (action) {
+            case "add":
+                break;
+            case "remove":
+                break;
+            default:
+                throw new Error("Invalid btn clicked");
+        }
+
         let selection: Selection = {
+            action,
             room: this.roomList[this.state.roomSelection],
             device: event.currentTarget.id.split("-").splice(0,-1).join("-")
         };
@@ -59,17 +72,17 @@ export default class DeviceSelector extends React.Component<IDeviceSelectorProps
 
     render() {
         return (
-            <div className={"selector"}>
+            <div className={"device-selector"}>
                 <Select
+                    className="room-list"
                     placeholder={this.roomList[this.state.roomSelection]}
-                    style={{width: "100%"}} 
                     onSelect={(v) => {this.onRoomSelected(v as string)}}
                 >
                 {
                     this.roomList.map((value, index) => (<Option key={`${value}`} value={`${index}`}>{value}</Option>))
                 }
                 </Select>
-                <div className={"device-selector"}>
+                <div className={"device-list"}>
                     <List
                         size="small"
                         dataSource={this.props.roomDeviceMap.get(this.roomList[this.state.roomSelection])}
@@ -79,10 +92,10 @@ export default class DeviceSelector extends React.Component<IDeviceSelectorProps
                                     title={item}
                                     description={item}
                                 />
-                                    <Button id={`${item}-add`} key={`${item}-add`} type="link" size="small" onClick={this.onSelectionButtonClicked}>
+                                    <Button id={`${item}-add`} key={`${item}-add`} type="link" size="small" onClick={(e) => this.onSelectionButtonClicked(e)}>
                                         <Icon type="plus" style={{ fontSize:'15px', color:'green'}}/>
                                     </Button>
-                                    <Button id={`${item}-remove`} key={`${item}-remove`} type="link" size="small" onClick={this.onSelectionButtonClicked}>
+                                    <Button id={`${item}-remove`} key={`${item}-remove`} type="link" size="small" onClick={(e) => this.onSelectionButtonClicked(e)}>
                                         <Icon type="minus" style={{ fontSize:'15px', color:'red'}}/>
                                     </Button>
                             </List.Item>

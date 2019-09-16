@@ -25,8 +25,8 @@ export default class HouseWindow {
 
     createWindow() {
         this.window = new BrowserWindow({
-            width: 1200,
-            height: 600,
+            width: 1120,
+            height: 800,
             webPreferences: {
                 nodeIntegration: false,
                 contextIsolation: false

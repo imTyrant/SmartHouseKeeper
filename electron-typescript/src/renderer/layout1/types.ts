@@ -1,4 +1,4 @@
-export namespace SHKTypes{
+export namespace ConfigTypes{
     export interface RoomDetail {
         name: string;
     }

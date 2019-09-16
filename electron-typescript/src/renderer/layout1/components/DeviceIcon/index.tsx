@@ -1,17 +1,16 @@
 import * as React from 'react';
-
+import "./style/index.css";
 import Button from 'antd/es/button';
-import Popover from 'antd/es/popover';
-import Switch from 'antd/es/switch';
-import notification from 'antd/es/notification';
-import Icon from 'antd/es/icon';
-import Radio from 'antd/es/radio';
-
-import 'antd/es/popover/style'
-import 'antd/es/switch/style'
 import 'antd/es/button/style'
+import Popover from 'antd/es/popover';
+import 'antd/es/popover/style'
+import Switch from 'antd/es/switch';
+import 'antd/es/switch/style'
+import notification from 'antd/es/notification';
 import 'antd/es/notification/style'
+import Icon from 'antd/es/icon';
 import 'antd/es/radio/style'
+import Radio from 'antd/es/radio';
 import { RadioChangeEvent } from 'antd/lib/radio';
 
 export interface IStatusChangedEvent {
@@ -115,11 +114,11 @@ export default class ControlPanel extends React.Component<IControlPanelProps, IC
 
     render() {
         return (
-            <div>
+            <div className="device-icon">
                 <Popover autoAdjustOverflow={true} arrowPointAtCenter={true} content={this.makePopoverContent()}
                     trigger="click" title={`${this.props.position}:${this.props.deviceName}`}>
                        {
-                           this.props.icon === "" ? <Button size="small"><Icon type="deployment-unit" /></Button> : 
+                           this.props.icon === "" ? <Button type="link" size="small"><Icon type="deployment-unit" /></Button> : 
                             <img src={`${this.props.icon}`} style={{width:"40px", height:"40px"}}></img>
                         }
                 </Popover>

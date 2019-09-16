@@ -1,12 +1,10 @@
-.room-selector {
+.room-list {
     width: 150px;
 }
 
-.device-selector {
+.device-list {
     border: 1px solid #e8e8e8;
     border-radius: 4px;
     overflow: auto;
     padding: 8px 24px;
-    height: 200px;
-    width: 100%;
 }

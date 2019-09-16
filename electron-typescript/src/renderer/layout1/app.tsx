@@ -1,6 +1,10 @@
 import * as React from 'react';
 import DeviceSelector from './components/DeviceSelector';
 import StatueTable from './components/StatusTable';
+import ViewWindow from './components/ViewWindow';
+
+import "./app.css"
+import ControlPanel from './components/ControlPanel';
 
 export interface IAppProps {
 
@@ -28,6 +32,18 @@ export default class App extends React.Component<IAppProps, IAppStates> {
             {
                 room: "room2",
                 devices: ["d1", "d2"]
+            },
+            {
+                room: "room3",
+                devices: ["d1", "d2", "d1", "d2"]
+            },
+            {
+                room: "room4",
+                devices: ["d1", "d2", "d1", "d2"]
+            },
+            {
+                room: "room5",
+                devices: ["d1", "d2", "d1", "d2"]
             }
         ]
     
@@ -40,18 +56,13 @@ export default class App extends React.Component<IAppProps, IAppStates> {
 
         return (
             <div>
-                <div style={{width: "500px"}}>
-                    <DeviceSelector
-                        house={house}
-                        roomDeviceMap={roomDeviceMap}
-                        onDeviceSelected={console.log}
-                    />
-                </div>
-                <div style={{position:"absolute", width: "200px", height: "100px"}}>
-                    <StatueTable
-                        panels={list}
-                    />
-                </div>
+                <ViewWindow
+                    deviceList={[]}
+                />
+                <ControlPanel
+                    deviceSelector = {{house, roomDeviceMap, onDeviceSelected: console.log}}
+                    statusTable = {{panels: list}}
+                />
             </div>
         );
     }
