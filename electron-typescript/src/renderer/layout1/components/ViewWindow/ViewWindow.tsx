@@ -23,7 +23,7 @@ class ViewWindow extends React.Component <IViewMainProps, IViewMainStates>{
 
     render() {
         return (
-            <div className="view-window">
+            <div id="main-window" className="view-window">
                 <img id="house-image" src={HouseImagePath} useMap={`#${MapRef}`}/>
                 <map name={`${MapRef}`}>
                     <area id="balcony" onMouseOut={(e) => positionChecker.onPositionOutHandler(e)} onMouseOver={(e) => positionChecker.onPositionOndHandler(e)} shape="poly" coords="70,26,70,66,22,66,22,109,269,109,269,26,70,26"/>

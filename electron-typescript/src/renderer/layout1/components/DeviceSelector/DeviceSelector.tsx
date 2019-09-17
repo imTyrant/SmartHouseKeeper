@@ -12,6 +12,7 @@ import "antd/es/button/style";
 
 import "./style/index.css";
 import Icon from 'antd/es/icon';
+import MouseTracker from '../MouseTracker/MouseTracker';
 
 const Option = Select.Option;
 
@@ -29,6 +30,7 @@ export interface IDeviceSelectorProps {
 
 export interface IDeviceSelectorStates {
     roomSelection: number;
+    add: boolean;
 }
 
 class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelectorStates> {
@@ -40,7 +42,8 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
 
     constructor(props: IDeviceSelectorProps) {
         super(props);
-        this.state = {roomSelection: 0};
+        // this.state = {roomSelection: 0};
+        this.state = {roomSelection: 0, add: false};
         this.roomList = this.props.house;
     }
 
@@ -49,12 +52,15 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
     }
 
     onSelectionButtonClicked(event: React.MouseEvent<HTMLElement, MouseEvent>) {
+        
         let resultArray = event.currentTarget.id.split("-");
-        let action = resultArray[-1];
-        let device = resultArray.splice(0,-1).join("-");
-
+        console.log(resultArray);
+        let action = resultArray[resultArray.length - 1];
+        let device = resultArray.splice(0,resultArray.length - 1).join("-");
+        console.log(action);
         switch (action) {
             case "add":
+                this.setState({add: true});
                 break;
             case "remove":
                 break;
@@ -65,12 +71,15 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
         let selection: Selection = {
             action,
             room: this.roomList[this.state.roomSelection],
-            device: event.currentTarget.id.split("-").splice(0,-1).join("-")
+            device
         };
         this.props.onDeviceSelected(selection); // Return the selection to the parent.
+
     }
 
     render() {
+        const lala = this.state.add ? (<MouseTracker/>) : null;
+
         return (
             <div className={"device-selector"}>
                 <Select
@@ -101,6 +110,7 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
                             </List.Item>
                         )}
                     />
+                    {lala}
                 </div>
             </div>
         );

@@ -1,3 +1,9 @@
 .view-window {
     padding: 0 5px 0 5px;
 }
+
+/* .view-window > map {
+    position: absolute;
+    z-index: 999;
+    background-color: rgb(177, 177, 109);
+} */
