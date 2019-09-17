@@ -1,10 +1,8 @@
 import * as React from 'react';
-import DeviceSelector from './components/DeviceSelector';
-import StatueTable from './components/StatusTable';
-import ViewWindow from './components/ViewWindow';
 
 import "./app.css"
-import ControlPanel from './components/ControlPanel';
+import { ViewWindow, ViewWindowWithStore } from './components/ViewWindow';
+import { ControlPanel, ControlPanelWithStore } from './components/ControlPanel';
 
 export interface IAppProps {
 
@@ -56,13 +54,19 @@ export default class App extends React.Component<IAppProps, IAppStates> {
 
         return (
             <div>
-                <ViewWindow
+                {/* <ViewWindow
                     deviceList={[]}
-                />
-                <ControlPanel
+                /> */}
+                <ViewWindowWithStore deviceList={[]}/>
+                <ControlPanelWithStore
                     deviceSelector = {{house, roomDeviceMap, onDeviceSelected: console.log}}
                     statusTable = {{panels: list}}
                 />
+                
+                {/* <ControlPanel
+                    deviceSelector = {{house, roomDeviceMap, onDeviceSelected: console.log}}
+                    statusTable = {{panels: list}}
+                /> */}
             </div>
         );
     }

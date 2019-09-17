@@ -15,3 +15,11 @@ export namespace ConfigTypes{
         roomList: Array<RoomDetail>;
     }
 }
+
+export namespace SystemTypes{
+
+    export enum ControlMode {
+        CONFIG = "CONFIG",
+        STATUS = "STATUS"
+    }
+}
