@@ -1,18 +1,22 @@
 export namespace ConfigTypes{
     export interface RoomDetail {
+        identifier: string;
         name: string;
     }
 
     export interface DeviceDetail {
+        identifier: string;
         name: string;
+        type: string;
         description: string;
         icon: string;
-        states: Array<string>;
+        states: string[];
     }
 
     export interface HouseDetail {
-        deviceDetail: Array<DeviceDetail>;
+        deviceList: Array<DeviceDetail>;
         roomList: Array<RoomDetail>;
+        roomDeviceMap?: Map<string, string>;
     }
 }
 

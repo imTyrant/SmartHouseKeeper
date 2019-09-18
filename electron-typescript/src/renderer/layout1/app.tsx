@@ -1,8 +1,14 @@
 import * as React from 'react';
+// import * as path from 'path';
+// import * as fs from 'fs';
 
 import "./app.css"
 import { ViewWindow, ViewWindowWithStore } from './components/ViewWindow';
 import { ControlPanel, ControlPanelWithStore } from './components/ControlPanel';
+import { ConfigTypes } from './types';
+import deviceInfo from './config/devices';
+import roomInfo from './config/rooms';
+
 
 export interface IAppProps {
 
@@ -17,8 +23,12 @@ export default class App extends React.Component<IAppProps, IAppStates> {
 
     };
 
+    private houseConfig: ConfigTypes.HouseDetail;
+
     constructor(props: IAppProps) {
-        super(props)
+        super(props);
+        this.houseConfig = {deviceList: deviceInfo, roomList: roomInfo};
+        console.log(this.houseConfig);
     }
     
     render() {
@@ -44,13 +54,10 @@ export default class App extends React.Component<IAppProps, IAppStates> {
                 devices: ["d1", "d2", "d1", "d2"]
             }
         ]
-    
-        let house = ["room1","room2","room3","room4"]
+        
+        let house = this.houseConfig.roomList.map((value: ConfigTypes.RoomDetail) => value.name);
         let roomDeviceMap = new Map<string, Array<string>>();
-        roomDeviceMap.set("room1", ["d1", "d2", "d3", "d4", "d5"]);
-        roomDeviceMap.set("room2", ["d1", "d2", "d3", "d4"]);
-        roomDeviceMap.set("room3", ["d1", "d2", "d3"]);
-        roomDeviceMap.set("room4", ["d1", "d2"]);
+        roomDeviceMap.set("all", this.houseConfig.deviceList.map((value: ConfigTypes.DeviceDetail) => value.name));
 
         return (
             <div>
@@ -59,7 +66,7 @@ export default class App extends React.Component<IAppProps, IAppStates> {
                 /> */}
                 <ViewWindowWithStore deviceList={[]}/>
                 <ControlPanelWithStore
-                    deviceSelector = {{house, roomDeviceMap, onDeviceSelected: console.log}}
+                    deviceSelector = {{rooms: roomInfo, availableDevices: deviceInfo, onDeviceSelected: console.log}}
                     statusTable = {{panels: list}}
                 />
                 

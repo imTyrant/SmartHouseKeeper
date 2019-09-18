@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Collapse from 'antd/es/collapse';
 import 'antd/es/collapse/style'
-// import * as styles from "./style/index.css";
 import "./style/index.css"
 
 const Panel = Collapse.Panel;
@@ -22,7 +21,7 @@ export interface IStatusTableState {
 class StatusTable extends React.Component<IStatusTableProps, IStatusTableState> {
 
     constructor(props: IStatusTableProps) {
-        super(props)
+        super(props);
     }
 
     render() {
@@ -33,7 +32,7 @@ class StatusTable extends React.Component<IStatusTableProps, IStatusTableState> 
                     this.props.panels.map((value, index) => {
                         return (<Panel key={`${index}`} header={value.room} >
                             {
-                                value.devices.map((value, index) => (<div key={`${index}`}><span>{value}</span><br/></div>))
+                                value.devices.map((value, index) => (<React.Fragment key={`${index}`}><span>{value}</span><br/></React.Fragment>))
                             }
                         </Panel>)
                     })

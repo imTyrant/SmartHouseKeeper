@@ -1,3 +1,5 @@
-#my-head {
-    z-index: 99;
+#mouse-tracker-container {
+    vertical-align: middle;
+    align-content: center;
+    z-index: -1;
 }

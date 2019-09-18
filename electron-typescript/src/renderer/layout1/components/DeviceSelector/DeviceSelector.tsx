@@ -1,31 +1,36 @@
 import * as React from 'react';
-import * as InfiniteScroll from "react-infinite-scroller";
+import "./style/index.css";
 
 import Select from "antd/es/select";
 import "antd/es/select/style";
-// import Card from "antd/es/card";
-// import "antd/es/card/style";
 import List from "antd/es/list";
 import "antd/es/list/style";
 import Button from "antd/es/button";
 import "antd/es/button/style";
 
-import "./style/index.css";
 import Icon from 'antd/es/icon';
-import MouseTracker from '../MouseTracker/MouseTracker';
+import MouseTracker, { PlacementDetail } from '../MouseTracker/MouseTracker';
+import { Locale } from '../../locale';
+import { ConfigTypes } from '../../types';
+import ImgLoader from '../../modules/img-loader';
 
 const Option = Select.Option;
 
 export interface Selection {
     action: string;
+    // room: string;
+    // device: string;
     room: string;
     device: string;
+    x: number;
+    y: number;
 }
 
 export interface IDeviceSelectorProps {
-    house: Array<string>;
-    roomDeviceMap: Map<string, Array<string>>;
+    rooms: ConfigTypes.RoomDetail[];
+    availableDevices: ConfigTypes.DeviceDetail[];
     onDeviceSelected: (selection: Selection) => void;
+    roomDeviceMap?: Map<string, string>;
 }
 
 export interface IDeviceSelectorStates {
@@ -35,57 +40,55 @@ export interface IDeviceSelectorStates {
 
 class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelectorStates> {
     static defaultProps = {
-        roomList: ["Empty"]
     }
 
-    private roomList: Array<string>;
+    private roomList: string[];
+    private MTContent: React.ReactElement;
+    private selection: Selection;
 
     constructor(props: IDeviceSelectorProps) {
         super(props);
-        // this.state = {roomSelection: 0};
         this.state = {roomSelection: 0, add: false};
-        this.roomList = this.props.house;
+        this.roomList = ["All"];
+        this.MTContent = {} as React.ReactElement;
+        this.selection = {x: 0, y: 0, action: "", device: "", room: ""};
     }
 
-    onRoomSelected(value: string) {
+    onSelectorPicked(value: string) {
         this.setState({roomSelection: +value}); // use + for string -> number
     }
 
-    onSelectionButtonClicked(event: React.MouseEvent<HTMLElement, MouseEvent>) {
+    onSelectionButtonClicked(action: string, index: number | string) {
+        this.selection.action = action;
+        const device = this.props.availableDevices[index as number];
+        this.selection.device = device.identifier;
         
-        let resultArray = event.currentTarget.id.split("-");
-        console.log(resultArray);
-        let action = resultArray[resultArray.length - 1];
-        let device = resultArray.splice(0,resultArray.length - 1).join("-");
-        console.log(action);
-        switch (action) {
+        switch (this.selection.action) {
             case "add":
                 this.setState({add: true});
+                this.MTContent = (<img style={{width:"100%", height:"100%"}} src={ImgLoader.load(device.icon, "path") as string}/>);
                 break;
             case "remove":
                 break;
             default:
-                throw new Error("Invalid btn clicked");
+                throw new Error(Locale.DEVICE_SELECTOR_WRONG_BUTTON_CLICKED);
         }
+    }
 
-        let selection: Selection = {
-            action,
-            room: this.roomList[this.state.roomSelection],
-            device
-        };
-        this.props.onDeviceSelected(selection); // Return the selection to the parent.
-
+    handleDevicePositionDecided(info: PlacementDetail) {
+        this.setState({add:false});
+        this.props.onDeviceSelected({...this.selection, x: info.x, y: info.y, room: info.room}); // Return the selection to the parent.
     }
 
     render() {
-        const lala = this.state.add ? (<MouseTracker/>) : null;
+        const mouseTrackerComponent = this.state.add ? (<MouseTracker onPositionChosen={this.handleDevicePositionDecided.bind(this)}>{this.MTContent}</MouseTracker>) : null;
 
         return (
             <div className={"device-selector"}>
                 <Select
                     className="room-list"
                     placeholder={this.roomList[this.state.roomSelection]}
-                    onSelect={(v) => {this.onRoomSelected(v as string)}}
+                    onSelect={(v) => {this.onSelectorPicked(v as string)}}
                 >
                 {
                     this.roomList.map((value, index) => (<Option key={`${value}`} value={`${index}`}>{value}</Option>))
@@ -94,23 +97,26 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
                 <div className={"device-list"}>
                     <List
                         size="small"
-                        dataSource={this.props.roomDeviceMap.get(this.roomList[this.state.roomSelection])}
+                        dataSource={this.props.availableDevices}
                         renderItem={(item, index) => (
-                            <List.Item key={`${index}`} >
+                            <List.Item key={`${index}`}
+                                actions={[
+                                    <Button key={`${item.identifier}-add`} type="link" size="small" 
+                                        onClick={(e) => {this.onSelectionButtonClicked("add", index)}}
+                                    >
+                                        <Icon type="plus" style={{ fontSize:'15px', color:'#87d068'}}/>
+                                    </Button>
+                                ]}
+                            >
                                 <List.Item.Meta
-                                    title={item}
-                                    description={item}
+                                    avatar={<img style={{width:"20px", height:"20px"}} src={ImgLoader.load(item.icon, "path") as string} />} // NOT WORK!!
+                                    title={item.name}
+                                    description={item.description}
                                 />
-                                    <Button id={`${item}-add`} key={`${item}-add`} type="link" size="small" onClick={(e) => this.onSelectionButtonClicked(e)}>
-                                        <Icon type="plus" style={{ fontSize:'15px', color:'green'}}/>
-                                    </Button>
-                                    <Button id={`${item}-remove`} key={`${item}-remove`} type="link" size="small" onClick={(e) => this.onSelectionButtonClicked(e)}>
-                                        <Icon type="minus" style={{ fontSize:'15px', color:'red'}}/>
-                                    </Button>
                             </List.Item>
                         )}
                     />
-                    {lala}
+                    {mouseTrackerComponent /* Here mount the MouseTracker component, but it will be added in to DOM root. */} 
                 </div>
             </div>
         );
