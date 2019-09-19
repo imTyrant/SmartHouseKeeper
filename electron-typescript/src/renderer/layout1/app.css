@@ -12,6 +12,11 @@
     width: 100%;
 }
 
+.device-icon {
+    width: 20px;
+    height: 20px;
+}
+
 .control-panel {
     float: left;
     width: 300px;

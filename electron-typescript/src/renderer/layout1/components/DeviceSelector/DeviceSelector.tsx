@@ -12,18 +12,17 @@ import Icon from 'antd/es/icon';
 import MouseTracker, { PlacementDetail } from '../MouseTracker/MouseTracker';
 import { Locale } from '../../locale';
 import { ConfigTypes } from '../../types';
-import ImgLoader from '../../modules/img-loader';
+import { ConfigLoader } from '../../utils/config-loader';
 
 const Option = Select.Option;
 
 export interface Selection {
     action: string;
-    // room: string;
-    // device: string;
     room: string;
     device: string;
     x: number;
     y: number;
+    detail: ConfigTypes.DeviceDetail;
 }
 
 export interface IDeviceSelectorProps {
@@ -51,7 +50,7 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
         this.state = {roomSelection: 0, add: false};
         this.roomList = ["All"];
         this.MTContent = {} as React.ReactElement;
-        this.selection = {x: 0, y: 0, action: "", device: "", room: ""};
+        this.selection = {x: 0, y: 0, action: "", device: "", room: "", detail: ({} as ConfigTypes.DeviceDetail)};
     }
 
     onSelectorPicked(value: string) {
@@ -62,11 +61,12 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
         this.selection.action = action;
         const device = this.props.availableDevices[index as number];
         this.selection.device = device.identifier;
+        this.selection.detail = device;
         
         switch (this.selection.action) {
             case "add":
                 this.setState({add: true});
-                this.MTContent = (<img style={{width:"100%", height:"100%"}} src={ImgLoader.load(device.icon, "path") as string}/>);
+                this.MTContent = (<img style={{width:"100%", height:"100%"}} src={ConfigLoader.loadImage(device.icon, "path") as string}/>);
                 break;
             case "remove":
                 break;
@@ -77,6 +77,7 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
 
     handleDevicePositionDecided(info: PlacementDetail) {
         this.setState({add:false});
+        if (info.room === "") { return; }
         this.props.onDeviceSelected({...this.selection, x: info.x, y: info.y, room: info.room}); // Return the selection to the parent.
     }
 
@@ -109,7 +110,7 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
                                 ]}
                             >
                                 <List.Item.Meta
-                                    avatar={<img style={{width:"20px", height:"20px"}} src={ImgLoader.load(item.icon, "path") as string} />} // NOT WORK!!
+                                    avatar={<img style={{width:"20px", height:"20px"}} src={ConfigLoader.loadImage(item.icon, "path") as string} />} // NOT WORK!!
                                     title={item.name}
                                     description={item.description}
                                 />

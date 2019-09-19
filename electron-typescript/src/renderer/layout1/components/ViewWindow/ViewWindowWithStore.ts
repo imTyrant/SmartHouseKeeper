@@ -4,6 +4,7 @@ import { AppStore } from "../../store";
 
 function mapStateToProps(state: AppStore) {
     return {
+        deviceList: state.config,
         mode: state.mode
     };
 }

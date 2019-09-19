@@ -8,23 +8,12 @@ import { AddedDevice } from "../../store/config/types";
 function mapDispatchToProps(dispatch: any) {
     return {
         onDeviceSelected: (selection: Selection) => {
-            let test: AddedDevice = {
-                coords: {x: selection.x, y: selection.y},
-                id: `${selection.room}::${selection.device}`,
-                room: selection.room,
-                identifier: selection.device
-            }
-            dispatch(addDevice(test));
+            dispatch(addDevice(selection));
         }
     }
 }
 
-function mapStateToProps(state) {
-    console.log(state);
-    return {};
-}
-
-const DeviceSelectorWithStore = connect(mapStateToProps,  mapDispatchToProps)(DeviceSelector);
+const DeviceSelectorWithStore = connect(null,  mapDispatchToProps)(DeviceSelector);
 
 export default DeviceSelectorWithStore;
 

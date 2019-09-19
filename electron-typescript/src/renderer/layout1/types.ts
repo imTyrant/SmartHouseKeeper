@@ -10,7 +10,7 @@ export namespace ConfigTypes{
         type: string;
         description: string;
         icon: string;
-        states: string[];
+        statuses: string[];
     }
 
     export interface HouseDetail {

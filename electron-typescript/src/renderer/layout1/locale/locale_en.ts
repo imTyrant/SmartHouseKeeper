@@ -6,4 +6,8 @@ export namespace Locale {
 
     // Device Selector.
     export const DEVICE_SELECTOR_WRONG_BUTTON_CLICKED = "Invalid button clicked";
+
+    // Device Icon.
+    export const DEVICE_ICON_CHANGING_FAILED = "Changing failed!";
+    export const DEVICE_ICON_CHANGING_FAILED_INFO = "Cannot change the device status.";
 }

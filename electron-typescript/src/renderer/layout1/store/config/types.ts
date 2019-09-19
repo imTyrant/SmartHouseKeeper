@@ -1,5 +1,12 @@
+import { ConfigTypes } from "../../types";
+import { Selection } from "../../components/DeviceSelector";
+
 export const ADD_DEVICE = "ADD_DEVICE";
+export type ADD_DEVICE = typeof ADD_DEVICE;
 export const REMOVE_DEVICE = "REMOVE_DEVICE";
+export type REMOVE_DEVICE = typeof REMOVE_DEVICE;
+export const UPDATE_DEVICE = "UPDATE_DEVICE";
+export type UPDATE_DEVICE = typeof UPDATE_DEVICE;
 
 export interface Coords {
     x: number;
@@ -8,9 +15,11 @@ export interface Coords {
 
 export interface AddedDevice {
     id: string;
-    room: string;
     identifier: string;
+    room: string;
     coords: Coords;
+    status: number;
+    detail: ConfigTypes.DeviceDetail;
 }
 
 export interface AddedDevicesList {
@@ -18,14 +27,24 @@ export interface AddedDevicesList {
     detail: Map<string, string[]>; // map room identifier to the list of devices installed in it
 }
 
+export interface UpdatingParam {
+    id: string;
+    status: number;
+}
+
 interface AddDeviceAction {
-    type: typeof ADD_DEVICE;
-    config: AddedDevice;
+    type: ADD_DEVICE;
+    config: Selection;
 }
 
 interface RemoveDeviceAction {
-    type: typeof REMOVE_DEVICE;
+    type: REMOVE_DEVICE;
     id: string;
 }
 
-export type DeviceConfigAction = AddDeviceAction | RemoveDeviceAction;
+interface UpdateDeviceAction {
+    type: UPDATE_DEVICE;
+    param: UpdatingParam;
+}
+
+export type DeviceConfigAction = AddDeviceAction | RemoveDeviceAction | UpdateDeviceAction;

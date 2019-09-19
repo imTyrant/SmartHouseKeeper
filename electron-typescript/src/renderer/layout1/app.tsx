@@ -2,7 +2,7 @@ import * as React from 'react';
 // import * as path from 'path';
 // import * as fs from 'fs';
 
-import "./app.css"
+import "./app.css";
 import { ViewWindow, ViewWindowWithStore } from './components/ViewWindow';
 import { ControlPanel, ControlPanelWithStore } from './components/ControlPanel';
 import { ConfigTypes } from './types';
@@ -28,7 +28,6 @@ export default class App extends React.Component<IAppProps, IAppStates> {
     constructor(props: IAppProps) {
         super(props);
         this.houseConfig = {deviceList: deviceInfo, roomList: roomInfo};
-        console.log(this.houseConfig);
     }
     
     render() {
@@ -61,19 +60,10 @@ export default class App extends React.Component<IAppProps, IAppStates> {
 
         return (
             <div>
-                {/* <ViewWindow
-                    deviceList={[]}
-                /> */}
-                <ViewWindowWithStore deviceList={[]}/>
+                <ViewWindowWithStore/>
                 <ControlPanelWithStore
                     deviceSelector = {{rooms: roomInfo, availableDevices: deviceInfo, onDeviceSelected: console.log}}
-                    statusTable = {{panels: list}}
                 />
-                
-                {/* <ControlPanel
-                    deviceSelector = {{house, roomDeviceMap, onDeviceSelected: console.log}}
-                    statusTable = {{panels: list}}
-                /> */}
             </div>
         );
     }

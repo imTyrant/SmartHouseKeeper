@@ -1,16 +1,24 @@
-import { ADD_DEVICE, AddedDevice, REMOVE_DEVICE } from './types';
+import { ADD_DEVICE, REMOVE_DEVICE, DeviceConfigAction, UpdatingParam, UPDATE_DEVICE } from './types';
+import { Selection } from '../../components/DeviceSelector';
 
 
-export function addDevice(config: AddedDevice) {
+export function addDevice(selection: Selection): DeviceConfigAction {
     return {
         type: ADD_DEVICE,
-        config
+        config: selection
     }
 }
 
-export function removeDevice(id: string) {
+export function removeDevice(id: string): DeviceConfigAction {
     return {
-        type : REMOVE_DEVICE,
+        type: REMOVE_DEVICE,
         id
+    }
+}
+
+export function updateDevice(param: UpdatingParam) : DeviceConfigAction {
+    return {
+        type: UPDATE_DEVICE,
+        param
     }
 }

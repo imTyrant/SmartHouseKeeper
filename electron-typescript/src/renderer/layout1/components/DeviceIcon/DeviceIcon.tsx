@@ -10,8 +10,16 @@ import notification from 'antd/es/notification';
 import 'antd/es/notification/style'
 import Icon from 'antd/es/icon';
 import 'antd/es/radio/style'
+import Typography from 'antd/es/typography';
+import 'antd/es/typography/style';
 import Radio from 'antd/es/radio';
 import { RadioChangeEvent } from 'antd/lib/radio';
+import { ConfigLoader } from '../../utils/config-loader';
+import { ConfigTypes } from '../../types';
+import { Locale } from '../../locale';
+import { AddedDevice } from '../../store/config/types';
+
+const { Title, Text } = Typography;
 
 export interface IStatusChangedEvent {
     deviceName: string;
@@ -21,106 +29,67 @@ export interface IStatusChangedEvent {
 }
 
 export interface IDeviceIconProps {
-    icon: string;
-    deviceName?: string;
-    position?: string;
-    statusList?: Array<string>;
-    onStatusChanged?: (event: IStatusChangedEvent) => boolean;
+    info: AddedDevice;
+    onStatusChangeListener: (id: string, nextStatus: number) => void;
 }
 
 export interface IDeviceIconStates {
-    currentStatus: number;
 }
 
 class DeviceIcon extends React.Component<IDeviceIconProps, IDeviceIconStates> {
-    static defaultProps = {
-        icon: "",
-        deviceName: "",
-        position: "",
-        statusList: ["On", "Off"],
-        onStatusChanged: (e: IStatusChangedEvent) => true,
-    };
+
+    private deviceInfo: ConfigTypes.DeviceDetail;
 
     constructor(props: IDeviceIconProps) {
         super(props);
-        this.state = {currentStatus: 0};
-    }
-
-    parseCurrentState(): string | boolean {
-        if (this.props.statusList!.length === 2) {
-            return this.state.currentStatus === 0 ? false : true;
-        } else {
-            return `${this.state.currentStatus}`;
-        }
-    }
-
-    switchChangedHandler(checked: boolean, event: MouseEvent): void {
-        const e: IStatusChangedEvent = {
-            deviceName: this.props.deviceName!,
-            position: this.props.position!,
-            nextStatus: checked ? 1 : 0,
-            currentStatus: this.state.currentStatus
-        }
-
-        if (this.props.onStatusChanged!((e))) {
-            this.setState({currentStatus: checked ? 1 : 0});
-        } else {
-            notification.open({
-                message: "Not now!",
-                description: "Cannot change device status.",
-                duration: 2
-            });
-        }        
-    }
-
-    radioChangedHandler(event: RadioChangeEvent): void {
-        console.log("1");
-        const e: IStatusChangedEvent = {
-            deviceName: this.props.deviceName!,
-            position: this.props.position!,
-            nextStatus: event.target.value,
-            currentStatus: this.state.currentStatus
-        }
-        console.log(event);
-        if (this.props.onStatusChanged!(e)) {
-            this.setState({currentStatus: e.nextStatus});
-        } else {
-            notification.open({
-                message: "Not now!",
-                description: "Cannot change device status.",
-                duration: 2
-            });
-        }
+        this.deviceInfo = ConfigLoader.device(this.props.info.identifier)!;
+        console.log("DI", "dommme!");
     }
 
     makePopoverContent() {
-        let content;
-        if (this.props.statusList!.length === 2) {
-            content =  (<Switch checked={this.parseCurrentState() as boolean} unCheckedChildren={this.props.statusList![0]}
-                    checkedChildren = {this.props.statusList![1]} onChange={(c, e) => {this.switchChangedHandler(c, e)}}/>);
+        console.log("DI", this.props.info);
+        let content: React.ReactElement;
+        if (this.deviceInfo.statuses.length === 2) {
+            content = (
+                <Switch
+                    checked={this.props.info.status !== 0} unCheckedChildren={this.deviceInfo.statuses[this.props.info.status]}
+                    checkedChildren={this.deviceInfo.statuses[this.props.info.status]}
+                    onChange={(c, e) => { this.props.onStatusChangeListener(this.props.info.id, c ? 1 : 0) }}
+                />
+            );
         } else {
-            content = (<Radio.Group id={"value-change"} value={this.parseCurrentState() as string} size="small" buttonStyle="outline"
-                    onChange={(e) => {this.radioChangedHandler(e)}}>
+            content = (
+                <Radio.Group
+                    value={this.props.info.status} size="small" buttonStyle="outline"
+                    onChange={(e) => { this.props.onStatusChangeListener(this.props.info.id, e.target.value) }}
+                >
                     {
-                        this.props.statusList!.map((value, index) => <Radio.Button key={`${index}`} value={`${index}`}> {value}</Radio.Button>)
+                        this.deviceInfo.statuses.map((value, index) => <Radio.Button key={`${this.props}_${index}`} value={index}>{value}</Radio.Button>)
                     }
-                    </Radio.Group>
-            )
+                </Radio.Group>
+            );
         }
         return (
-            <div>{content}</div>
+            <div className="popover-container">{content}</div>
         );
     }
 
     render() {
         return (
             <div className="device-icon">
-                <Popover autoAdjustOverflow={true} arrowPointAtCenter={true} content={this.makePopoverContent()}
-                    trigger="click" title={`${this.props.position}:${this.props.deviceName}`}>
-                       {
-                           this.props.icon === "" ? <Button type="link" size="small"><Icon type="deployment-unit" /></Button> : 
-                            <img src={`${this.props.icon}`} style={{width:"40px", height:"40px"}}></img>
-                        }
+                <Popover
+                    autoAdjustOverflow={true} arrowPointAtCenter={true}
+                    title={
+                        <React.Fragment>
+                            <Text strong >{this.deviceInfo.name}</Text> <br />
+                            <Text type="secondary" >{this.props.info.id}</Text>
+                        </React.Fragment>
+                    }
+                    content={this.makePopoverContent()} trigger="click"
+                >
+                    {
+                        <img src={ConfigLoader.loadImage(this.deviceInfo.icon, "path") as string} />
+                    }
                 </Popover>
             </div>
         );

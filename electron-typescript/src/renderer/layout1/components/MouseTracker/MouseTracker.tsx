@@ -108,9 +108,8 @@ export default class MouseTracker extends React.Component<IMouseTrackerProps, IM
                 description: Locale.MOUSE_TRACKER_WRONG_ACTION_INFO,
                 duration: 2
             });
-        } else {
-            this.props.onPositionChosen!({x: this.state.x, y: this.state.y, room: this.state.curPosition});
         }
+        this.props.onPositionChosen!({x: this.state.x, y: this.state.y, room: this.state.curPosition});
     }
 
     render() {

@@ -1,5 +1,12 @@
 import { ConfigTypes } from "../types";
 
+//////////////////////////////////////////////////////////////
+//                       NOTICE                             //
+//----------------------------------------------------------//
+//  ALL OF DEVICE DEFAULT STATUS IS TAKEN AS THE FIRST ONE! //
+//  All of device default status is taken as the first one! //
+//           设备的第一个状态被认为其默认（初始）状态              //
+//////////////////////////////////////////////////////////////
 const deviceInfo: ConfigTypes.DeviceDetail[] = 
 [
     {
@@ -8,7 +15,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "device",
         "description": "这是描述",
         "icon": "remove.svg",
-        "states": ["关闭", "开启"]
+        "statuses": ["关闭", "开启"]
     },
     {
         "identifier": "aerograph",
@@ -16,7 +23,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "sensor",
         "description": "这是描述",
         "icon": "aerograph.png",
-        "states": ["晴", "阴", "雨"]
+        "statuses": ["晴", "阴", "雨"]
     },
     {
         "identifier": "ac",
@@ -24,7 +31,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "device",
         "description": "这是描述",
         "icon": "ac.png",
-        "states": ["关闭", "制冷", "制热"]
+        "statuses": ["关闭", "制冷", "制热"]
     },
     {
         "identifier": "motion",
@@ -32,7 +39,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "sensor",
         "description": "这是描述",
         "icon": "motion.png",
-        "states": ["无人", "有人"]
+        "statuses": ["无人", "有人"]
     },
     {
         "identifier": "door",
@@ -40,7 +47,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "device",
         "description": "这是描述",
         "icon": "door.png",
-        "states": ["关闭", "打开"]
+        "statuses": ["关闭", "打开"]
     },
     {
         "identifier": "window",
@@ -48,7 +55,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "device",
         "description": "这是描述",
         "icon": "window.png",
-        "states": ["关闭", "打开"]
+        "statuses": ["关闭", "打开"]
     },
     {
         "identifier": "waterLeaker",
@@ -56,7 +63,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "sensor",
         "description": "这是描述",
         "icon": "waterleaker.png",
-        "states": ["正常", "漏水"]
+        "statuses": ["正常", "漏水"]
     },
     {
         "identifier": "coffeeMac",
@@ -64,7 +71,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "device",
         "description": "这是描述",
         "icon": "coffee_machine.png",
-        "states": ["关闭", "运行"]
+        "statuses": ["关闭", "运行"]
     },
     {
         "identifier": "smoke",
@@ -72,7 +79,7 @@ const deviceInfo: ConfigTypes.DeviceDetail[] =
         "type": "sensor",
         "description": "这是描述",
         "icon": "smoke.png",
-        "states": ["正常", "有烟"]
+        "statuses": ["正常", "有烟"]
     }
 ]
 

@@ -2,8 +2,8 @@ import * as React from 'react';
 import Menu, { ClickParam } from 'antd/es/menu';
 import 'antd/es/menu/style';
 import './style/index.css';
-import { DeviceSelector, IDeviceSelectorProps } from '../DeviceSelector';
-import { StatusTable, IStatusTableProps } from '../StatusTable';
+import { DeviceSelector, IDeviceSelectorProps, DeviceSelectorWithStore } from '../DeviceSelector';
+import { StatusTable, IStatusTableProps, StatusTableWithStore } from '../StatusTable';
 
 const Item = Menu.Item;
 
@@ -37,11 +37,11 @@ class ControlPanel extends React.Component<IControlPanelProps, IControlPanelStat
         let content;
         switch(this.state.currentWin) {
             case wins.DEVICE_SELECTOR:
-                content = <DeviceSelector {...this.props.deviceSelector!}/>
+                content = <DeviceSelectorWithStore {...this.props.deviceSelector!}/>
                 break;
             case wins.STATUS_TAB:
             default:
-                content = <StatusTable {...this.props.statusTable!}/>;
+                content = <StatusTableWithStore {...this.props.statusTable!}/>;
                 break;
         }
 
