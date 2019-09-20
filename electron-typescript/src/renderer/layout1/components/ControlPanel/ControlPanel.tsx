@@ -4,6 +4,7 @@ import 'antd/es/menu/style';
 import './style/index.css';
 import { DeviceSelector, IDeviceSelectorProps, DeviceSelectorWithStore } from '../DeviceSelector';
 import { StatusTable, IStatusTableProps, StatusTableWithStore } from '../StatusTable';
+import { Locale } from '../../locale';
 
 const Item = Menu.Item;
 
@@ -50,10 +51,10 @@ class ControlPanel extends React.Component<IControlPanelProps, IControlPanelStat
                 <div className="panel-menu">
                     <Menu onClick={(p) => this.menuSelected(p)} selectedKeys={[this.state.currentWin]} mode="horizontal">
                         <Item key={wins.STATUS_TAB}>
-                            Status
+                            {Locale.CONTROL_PANEL_STATUS}
                         </Item>
                         <Item key={wins.DEVICE_SELECTOR}>
-                            Selection
+                            {Locale.CONTROL_PANEL_CONFIG}
                         </Item>
                     </Menu>
                 </div>

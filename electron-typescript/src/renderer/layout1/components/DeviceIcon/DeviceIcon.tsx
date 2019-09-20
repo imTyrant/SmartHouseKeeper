@@ -43,11 +43,9 @@ class DeviceIcon extends React.Component<IDeviceIconProps, IDeviceIconStates> {
     constructor(props: IDeviceIconProps) {
         super(props);
         this.deviceInfo = ConfigLoader.device(this.props.info.identifier)!;
-        console.log("DI", "dommme!");
     }
 
     makePopoverContent() {
-        console.log("DI", this.props.info);
         let content: React.ReactElement;
         if (this.deviceInfo.statuses.length === 2) {
             content = (

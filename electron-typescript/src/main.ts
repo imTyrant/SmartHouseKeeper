@@ -6,12 +6,9 @@ import EventGenerator from "./modules/event-generator";
 
 import {app} from "electron";
 
-// const {app} = require('electron');
-
-
-const path = require('path');
-const os = require('os');
-const fs = require('fs');
+import * as path from 'path';
+import * as os from 'os';
+import * as fs from 'fs';
 
 /**
  * Main entrance of the app.
@@ -20,22 +17,19 @@ const fs = require('fs');
 class SmartHouseKeeper {
 
     private houseWindow!: HouseWindow;
-    // private smartHouse: SmartHouse;
-    // private appSimulator: AppSimulator;
-    // private eventGenerator: EventGenerator;
-
+    
     constructor() {
-        // this.houseWindow = new HouseWindow();
+        this.houseWindow = new HouseWindow();
         // this.smartHouse = new SmartHouse(null);
         // this.appSimulator = null;
         // this.eventGenerator = null;
     }
 
-    init() {
+    public init() {
         this.initApp();
     }
 
-    initApp() {
+    private initApp() {
         app.on('ready', () => {
             this.houseWindow = new HouseWindow();
         });

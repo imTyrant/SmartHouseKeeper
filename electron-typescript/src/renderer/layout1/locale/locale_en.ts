@@ -10,4 +10,8 @@ export namespace Locale {
     // Device Icon.
     export const DEVICE_ICON_CHANGING_FAILED = "Changing failed!";
     export const DEVICE_ICON_CHANGING_FAILED_INFO = "Cannot change the device status.";
+
+    // Control Panel.
+    export const CONTROL_PANEL_STATUS = "Status";
+    export const CONTROL_PANEL_CONFIG = "Config";
 }

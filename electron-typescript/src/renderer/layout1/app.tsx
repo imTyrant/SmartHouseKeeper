@@ -31,33 +31,6 @@ export default class App extends React.Component<IAppProps, IAppStates> {
     }
     
     render() {
-        let list = [
-            {
-                room: "room1",
-                devices: ["d1", "d2", "d3"]
-            },
-            {
-                room: "room2",
-                devices: ["d1", "d2"]
-            },
-            {
-                room: "room3",
-                devices: ["d1", "d2", "d1", "d2"]
-            },
-            {
-                room: "room4",
-                devices: ["d1", "d2", "d1", "d2"]
-            },
-            {
-                room: "room5",
-                devices: ["d1", "d2", "d1", "d2"]
-            }
-        ]
-        
-        let house = this.houseConfig.roomList.map((value: ConfigTypes.RoomDetail) => value.name);
-        let roomDeviceMap = new Map<string, Array<string>>();
-        roomDeviceMap.set("all", this.houseConfig.deviceList.map((value: ConfigTypes.DeviceDetail) => value.name));
-
         return (
             <div>
                 <ViewWindowWithStore/>
