@@ -1,4 +1,4 @@
-export namespace ConfigTypes{
+export namespace RendererTypes{
     export interface RoomDetail {
         identifier: string;
         name: string;

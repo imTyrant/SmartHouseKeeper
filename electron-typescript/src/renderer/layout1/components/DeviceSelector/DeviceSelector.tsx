@@ -11,7 +11,7 @@ import "antd/es/button/style";
 import Icon from 'antd/es/icon';
 import MouseTracker, { PlacementDetail } from '../MouseTracker/MouseTracker';
 import { Locale } from '../../locale';
-import { ConfigTypes } from '../../types';
+import { RendererTypes } from '../../types';
 import { ConfigLoader } from '../../utils/config-loader';
 
 const Option = Select.Option;
@@ -22,12 +22,12 @@ export interface Selection {
     device: string;
     x: number;
     y: number;
-    detail: ConfigTypes.DeviceDetail;
+    detail: RendererTypes.DeviceDetail;
 }
 
 export interface IDeviceSelectorProps {
-    rooms: ConfigTypes.RoomDetail[];
-    availableDevices: ConfigTypes.DeviceDetail[];
+    rooms: RendererTypes.RoomDetail[];
+    availableDevices: RendererTypes.DeviceDetail[];
     onDeviceSelected: (selection: Selection) => void;
     roomDeviceMap?: Map<string, string>;
 }
@@ -50,7 +50,7 @@ class DeviceSelector extends React.Component<IDeviceSelectorProps, IDeviceSelect
         this.state = {roomSelection: 0, add: false};
         this.roomList = ["All"];
         this.MTContent = {} as React.ReactElement;
-        this.selection = {x: 0, y: 0, action: "", device: "", room: "", detail: ({} as ConfigTypes.DeviceDetail)};
+        this.selection = {x: 0, y: 0, action: "", device: "", room: "", detail: ({} as RendererTypes.DeviceDetail)};
     }
 
     onSelectorPicked(value: string) {

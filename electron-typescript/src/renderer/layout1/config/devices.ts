@@ -1,4 +1,4 @@
-import { ConfigTypes } from "../types";
+import { RendererTypes } from "../types";
 
 //////////////////////////////////////////////////////////////
 //                       NOTICE                             //
@@ -7,7 +7,7 @@ import { ConfigTypes } from "../types";
 //  All of device default status is taken as the first one! //
 //           设备的第一个状态被认为其默认（初始）状态              //
 //////////////////////////////////////////////////////////////
-const deviceInfo: ConfigTypes.DeviceDetail[] = 
+const deviceInfo: RendererTypes.DeviceDetail[] = 
 [
     {
         "identifier": "bulb",

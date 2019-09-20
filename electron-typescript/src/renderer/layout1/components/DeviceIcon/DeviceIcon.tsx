@@ -15,7 +15,7 @@ import 'antd/es/typography/style';
 import Radio from 'antd/es/radio';
 import { RadioChangeEvent } from 'antd/lib/radio';
 import { ConfigLoader } from '../../utils/config-loader';
-import { ConfigTypes } from '../../types';
+import { RendererTypes } from '../../types';
 import { Locale } from '../../locale';
 import { AddedDevice } from '../../store/config/types';
 
@@ -38,7 +38,7 @@ export interface IDeviceIconStates {
 
 class DeviceIcon extends React.Component<IDeviceIconProps, IDeviceIconStates> {
 
-    private deviceInfo: ConfigTypes.DeviceDetail;
+    private deviceInfo: RendererTypes.DeviceDetail;
 
     constructor(props: IDeviceIconProps) {
         super(props);

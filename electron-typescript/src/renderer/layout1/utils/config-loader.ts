@@ -2,13 +2,13 @@ import * as React from 'react';
 import * as path from 'path';
 import Devices from '../config/devices';
 import Rooms from '../config/rooms';
-import { ConfigTypes } from '../types';
+import { RendererTypes } from '../types';
 
 const IMG_PATH = "./img/";
 
 class ConfigLoaderClass {
-    private DevicesMap: Map<string, ConfigTypes.DeviceDetail>;
-    private RoomsMap: Map<string, ConfigTypes.RoomDetail>;
+    private DevicesMap: Map<string, RendererTypes.DeviceDetail>;
+    private RoomsMap: Map<string, RendererTypes.RoomDetail>;
 
     constructor() {
         this.DevicesMap = new Map();
@@ -51,14 +51,14 @@ class ConfigLoaderClass {
         return undefined;
     }
 
-    public device(identifier: string): ConfigTypes.DeviceDetail | undefined {
+    public device(identifier: string): RendererTypes.DeviceDetail | undefined {
         if (this.DevicesMap.has(identifier)) {
             return this.DevicesMap.get(identifier)!;
         }
         return undefined;
     }
 
-    public room(identifier: string): ConfigTypes.RoomDetail | undefined {
+    public room(identifier: string): RendererTypes.RoomDetail | undefined {
         if (this.RoomsMap.has(identifier)) {
             return this.RoomsMap.get(identifier)!;
         }

@@ -5,7 +5,7 @@ import * as React from 'react';
 import "./app.css";
 import { ViewWindow, ViewWindowWithStore } from './components/ViewWindow';
 import { ControlPanel, ControlPanelWithStore } from './components/ControlPanel';
-import { ConfigTypes } from './types';
+import { RendererTypes } from './types';
 import deviceInfo from './config/devices';
 import roomInfo from './config/rooms';
 
@@ -23,7 +23,7 @@ export default class App extends React.Component<IAppProps, IAppStates> {
 
     };
 
-    private houseConfig: ConfigTypes.HouseDetail;
+    private houseConfig: RendererTypes.HouseDetail;
 
     constructor(props: IAppProps) {
         super(props);

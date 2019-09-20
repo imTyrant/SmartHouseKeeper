@@ -1,6 +1,6 @@
-import { ConfigTypes } from "../types";
+import { RendererTypes } from "../types";
 
-const roomInfo: ConfigTypes.RoomDetail[] =
+const roomInfo: RendererTypes.RoomDetail[] =
 [
     {
         "identifier": "balcony",

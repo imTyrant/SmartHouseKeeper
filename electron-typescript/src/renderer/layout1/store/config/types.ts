@@ -1,4 +1,4 @@
-import { ConfigTypes } from "../../types";
+import { RendererTypes } from "../../types";
 import { Selection } from "../../components/DeviceSelector";
 
 export const ADD_DEVICE = "ADD_DEVICE";
@@ -19,7 +19,7 @@ export interface AddedDevice {
     room: string;
     coords: Coords;
     status: number;
-    detail: ConfigTypes.DeviceDetail;
+    detail: RendererTypes.DeviceDetail;
 }
 
 export interface AddedDevicesList {
