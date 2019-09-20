@@ -6,12 +6,12 @@
 │  ├─layout1 // 使用的界面文件
 │  ├─layout2 // （没用的）
 │  └─layout3 // （没用的）
-├─dist // 编译输出文件
+├─dist // 编译输出文件（编译好的ts，tsx代码，并拷贝asset/layout1/*）
 ├─script // 脚本文件夹 （目前存放webpack脚本）
 └─src // typescript 脚本文件
     ├─config
     ├─modules // 存放模块，用在election一端
-    ├─renderer // 存放渲染页面的脚本，编译后生成index.js
+    ├─renderer // 存放渲染页面的代码，编译后生成index.js
     │  ├─layout1 // 对应于 asset/layout1
     │  │  ├─components // 页面中的主要模块
     │  │  ├─config // 提前定义好的文件
@@ -23,8 +23,12 @@
     └─utils // 工具类代码
 ```
 
-## 使用工具
-`TypeScript`, `React`, `Redux`, `electron`, `webpack`.
+## 开发依赖
+- 开发语言： `TypeScript`（建议），`JavaScript`
+
+- 开发平台： `nodejs`，`electron`
+
+- 界面开发： `React`，`Redux`，`webpack`（不重要）
 
 ## 命令
 `npm run build`: 编译代码 
