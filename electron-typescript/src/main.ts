@@ -19,10 +19,6 @@ class SmartHouseKeeper {
     private houseWindow!: HouseWindow;
     
     constructor() {
-        this.houseWindow = new HouseWindow();
-        // this.smartHouse = new SmartHouse(null);
-        // this.appSimulator = null;
-        // this.eventGenerator = null;
     }
 
     public init() {

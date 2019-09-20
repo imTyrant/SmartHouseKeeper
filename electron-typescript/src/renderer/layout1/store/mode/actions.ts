@@ -1,7 +1,6 @@
-import { ModeChangeAction, MODE_CHANGE } from "./types";
-import { SystemTypes } from "../../types";
+import { ModeChangeAction, MODE_CHANGE, ControlMode } from "./types";
 
-export function changeMode(mode: SystemTypes.ControlMode): ModeChangeAction {
+export function changeMode(mode: ControlMode): ModeChangeAction {
     return {
         type: MODE_CHANGE,
         mode

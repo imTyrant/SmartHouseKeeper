@@ -3,7 +3,6 @@ import * as ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import App from './app';
 import configStore from './store';
-import { SystemTypes } from './types';
 
 const store = configStore();
 

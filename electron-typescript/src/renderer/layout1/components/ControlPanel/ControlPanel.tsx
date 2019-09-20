@@ -5,42 +5,38 @@ import './style/index.css';
 import { DeviceSelector, IDeviceSelectorProps, DeviceSelectorWithStore } from '../DeviceSelector';
 import { StatusTable, IStatusTableProps, StatusTableWithStore } from '../StatusTable';
 import { Locale } from '../../locale';
+import { ControlMode } from '../../store/mode/types';
 
 const Item = Menu.Item;
 
 export interface IControlPanelProps {
     deviceSelector?: IDeviceSelectorProps;
     statusTable?: IStatusTableProps;
-    onModeChanged?: any;
+    onModeChanged: (mode: ControlMode) => void;
 }
 
 export interface IControlPanelStates {
-    currentWin: string;
+    currentWin: ControlMode;
 }
-
-enum wins {
-    STATUS_TAB = "status-table",
-    DEVICE_SELECTOR = "device-selector"
-};
 
 class ControlPanel extends React.Component<IControlPanelProps, IControlPanelStates> {
     constructor(props: IControlPanelProps) {
         super(props);
-        this.state = {currentWin: wins.STATUS_TAB};
+        this.state = {currentWin: ControlMode.STATUS};
     }
 
     menuSelected(param: ClickParam) {
-        this.props.onModeChanged!(param.key === wins.STATUS_TAB ? "STATUS":"CONFIG");
-        this.setState({currentWin: param.key});
+        this.props.onModeChanged!(param.key === ControlMode.STATUS? ControlMode.STATUS : ControlMode.CONFIG );
+        this.setState({currentWin: param.key === ControlMode.STATUS? ControlMode.STATUS : ControlMode.CONFIG });
     }
 
     render() {
         let content;
         switch(this.state.currentWin) {
-            case wins.DEVICE_SELECTOR:
+            case ControlMode.CONFIG:
                 content = <DeviceSelectorWithStore {...this.props.deviceSelector!}/>
                 break;
-            case wins.STATUS_TAB:
+            case ControlMode.STATUS:
             default:
                 content = <StatusTableWithStore {...this.props.statusTable!}/>;
                 break;
@@ -50,10 +46,10 @@ class ControlPanel extends React.Component<IControlPanelProps, IControlPanelStat
             <div className="control-panel">
                 <div className="panel-menu">
                     <Menu onClick={(p) => this.menuSelected(p)} selectedKeys={[this.state.currentWin]} mode="horizontal">
-                        <Item key={wins.STATUS_TAB}>
+                        <Item key={ControlMode.STATUS}>
                             {Locale.CONTROL_PANEL_STATUS}
                         </Item>
-                        <Item key={wins.DEVICE_SELECTOR}>
+                        <Item key={ControlMode.CONFIG}>
                             {Locale.CONTROL_PANEL_CONFIG}
                         </Item>
                     </Menu>

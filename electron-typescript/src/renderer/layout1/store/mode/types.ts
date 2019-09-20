@@ -1,10 +1,11 @@
-import { SystemTypes } from "../../types";
-
-export type SystemMode = typeof SystemTypes.ControlMode;
+export enum ControlMode {
+    CONFIG = "CONFIG",
+    STATUS = "STATUS"
+}
 
 export const MODE_CHANGE = "MODE_CHANGE";
 
 export interface ModeChangeAction {
     type: typeof MODE_CHANGE;
-    mode: SystemTypes.ControlMode;
+    mode: ControlMode;
 }
