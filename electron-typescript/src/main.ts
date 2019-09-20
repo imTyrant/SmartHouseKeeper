@@ -1,33 +1,44 @@
-// import SmartHouse from "./modules/smart-house";
-import SmartHouse from "./modules/smart-house"
-import HouseWindow from "./modules/house-window"
-import AppSimulator from "./modules/app-simulator";
-import EventGenerator from "./modules/event-generator";
-
-import {app} from "electron";
-
+import { app } from "electron";
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
+import HouseWindow from "./modules/house-window"
+import { SystemTypes } from "./types/system-types";
+
+const DefaultConfigFileName = "config.json";
+const DefaultConfigPath = "";
 
 /**
  * Main entrance of the app.
- * Basic idea, may be changed. 
  */
 class SmartHouseKeeper {
 
     private houseWindow!: HouseWindow;
-    
+    private appConfig!: SystemTypes.AppConfig;
+
     constructor() {
+        this.loadSystemConfig();
+        this.initMenu();
+        this.initApp();
     }
 
-    public init() {
-        this.initApp();
+    /**
+     * Load app configuration from user system
+     */
+    private loadSystemConfig() {
+        this.appConfig = {} as SystemTypes.AppConfig;
+    }
+
+    /**
+     * Initialize the app menu
+     */
+    private initMenu() {
+
     }
 
     private initApp() {
         app.on('ready', () => {
-            this.houseWindow = new HouseWindow();
+            this.houseWindow = new HouseWindow(this.appConfig);
         });
 
         app.on('window-all-closed', () => {
@@ -38,4 +49,4 @@ class SmartHouseKeeper {
     }
 }
 
-new SmartHouseKeeper().init()
+new SmartHouseKeeper();

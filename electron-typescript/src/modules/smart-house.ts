@@ -3,7 +3,7 @@ import * as path from 'path';
 import * as crypto from 'crypto';
 import AppSimulator from './app-simulator';
 import HouseDetail from '../config/house-detail';
-import {default as IPCChannel} from '../types/ipc-channel';
+import { IPCChannel } from '../types/ipc-channel';
 import Queue from '../utils/queue';
 
 export default class SmartHouse {
@@ -15,8 +15,8 @@ export default class SmartHouse {
     private addedDevices: any;
     private app: any;
 
-    constructor(config: any){
-        
+    constructor(config: any) {
+
         this.rooms = HouseDetail.room;
         this.devices = HouseDetail.device;
         this.appSimulator = new AppSimulator(config);
@@ -41,7 +41,7 @@ export default class SmartHouse {
         }
     }
 
-    get addedDevicesNum(){
+    get addedDevicesNum() {
         return this.addedDevices.length;
     }
 
@@ -51,7 +51,7 @@ export default class SmartHouse {
          * room. Currently, we assume devices only be added once in 
          * each room. So the problem is simpler. This will be changed 
          * later. 
-         */ 
+         */
         if (deviceID === undefined) {
             deviceID = selectedRoom + "-" + deviceType;
         }
@@ -68,7 +68,7 @@ export default class SmartHouse {
             });
         }
 
-        return {opt: "update", device: this.addedDevices.get(deviceID)};
+        return { opt: "update", device: this.addedDevices.get(deviceID) };
     }
 
     removeDevice(selectedRoom: any, deviceType: any, deviceID: any) {
@@ -85,9 +85,9 @@ export default class SmartHouse {
             } else {
                 // Throw error.
             }
-            return {opt: "delete", device};
+            return { opt: "delete", device };
         } else {
-            return {opt: "invalid", device: undefined};
+            return { opt: "invalid", device: undefined };
         }
     }
 
@@ -109,7 +109,7 @@ export default class SmartHouse {
          *   mode
          * }
          */
-        
+
         this.appSimulator.parseEvent();
     }
 }

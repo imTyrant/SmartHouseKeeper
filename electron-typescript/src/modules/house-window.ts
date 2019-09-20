@@ -1,23 +1,23 @@
 "use strict"
-// import * as IPCChannel from "../config/ipc-channel";
 import SmartHouse from "./smart-house";
 import * as path from "path";
 import * as fs from "fs";
-import {BrowserWindow, ipcMain, dialog} from "electron";
+import { BrowserWindow, ipcMain, dialog } from "electron";
 import EventGenerator from "./event-generator";
-import {default as IPCChannel} from "../types/ipc-channel";
+import { IPCChannel } from "../types/ipc-channel";
+import { SystemTypes } from "../types/system-types";
 
 /**
  * This module is used for generate ui based on choice [optional].
  */
 export default class HouseWindow {
-    private config: any;
+    private config!: SystemTypes.AppConfig;
     private smartHouse: SmartHouse;
     private eventGenerator: EventGenerator;
     private window!: BrowserWindow;
 
-    constructor() {
-        this.config = null;
+    constructor(config: SystemTypes.AppConfig) {
+        this.config = config;
         this.smartHouse = new SmartHouse(this.config);
         this.eventGenerator = new EventGenerator(this.config);
         this.init();
@@ -46,12 +46,12 @@ export default class HouseWindow {
         ipcMain.on(IPCChannel.RENDERER_DEVICE_REMOVE, (event, args) => this.onRemoveDevice(event, args));
         ipcMain.on(IPCChannel.RENDERER_POSITION_CHANGED, (event, args) => this.onPositionChanged(event, args))
     }
-    
+
     pickSavePath() {
         let option: Electron.SaveDialogOptions = {
             title: "log",
             filters: [
-                {name: "txt", extensions:["txt"]}
+                { name: "txt", extensions: ["txt"] }
             ]
         };
 
