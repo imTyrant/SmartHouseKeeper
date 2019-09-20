@@ -19,11 +19,3 @@ export namespace ConfigTypes{
         roomDeviceMap?: Map<string, string>;
     }
 }
-
-export namespace SystemTypes{
-
-    export enum ControlMode {
-        CONFIG = "CONFIG",
-        STATUS = "STATUS"
-    }
-}
