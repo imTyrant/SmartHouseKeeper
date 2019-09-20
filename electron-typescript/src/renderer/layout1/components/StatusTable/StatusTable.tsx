@@ -7,11 +7,6 @@ import { ConfigLoader } from '../../utils/config-loader';
 
 const Panel = Collapse.Panel;
 
-export interface StatusTablePanel {
-    room: string;
-    devices: Array<string>;
-}
-
 export interface IStatusTableProps {
     devicesList: AddedDevicesList;
 };
@@ -33,13 +28,13 @@ class StatusTable extends React.Component<IStatusTableProps, IStatusTableState> 
                 <Panel key={room} header={ConfigLoader.room(room)!.name}>
                     {
                         list.map((id) => {
-                            const instance = this.props.devicesList.list.get(id)!;
-                            const configInfo = ConfigLoader.device(instance.identifier)!;
+                            const instance = this.props.devicesList.list.get(id)!; // A device instance (a instance of AddedDevice).
+                            const configInfo = ConfigLoader.device(instance.identifier)!; // Config information (read from devices.ts) of the device.
                             return (
                                 <React.Fragment key={id}>
                                     <span>{instance.id}</span>
                                     <span>{configInfo.name}</span>
-                                    <span>{instance.status}</span>
+                                    <span>{configInfo.statuses[instance.status]}</span>
                                     <br />
                                 </React.Fragment>
                             )
