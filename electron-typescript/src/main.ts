@@ -2,11 +2,12 @@ import { app } from "electron";
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
-import HouseWindow from "./modules/house-window"
+import { HouseWindow } from "./modules/house-window"
 import { SystemTypes } from "./types/system-types";
 
 const DefaultConfigFileName = "config.json";
-const DefaultConfigPath = "";
+const DefaultConfigFilePath = "";
+const DefaultConfig: SystemTypes.AppConfig = {}
 
 /**
  * Main entrance of the app.
@@ -23,20 +24,20 @@ class SmartHouseKeeper {
     }
 
     /**
-     * Load app configuration from user system
+     * Load app configuration of user, or take the default Config
      */
-    private loadSystemConfig() {
-        this.appConfig = {} as SystemTypes.AppConfig;
+    private loadSystemConfig(): void {
+        this.appConfig = DefaultConfig;
     }
 
     /**
      * Initialize the app menu
      */
-    private initMenu() {
+    private initMenu(): void {
 
     }
 
-    private initApp() {
+    private initApp(): void {
         app.on('ready', () => {
             this.houseWindow = new HouseWindow(this.appConfig);
         });

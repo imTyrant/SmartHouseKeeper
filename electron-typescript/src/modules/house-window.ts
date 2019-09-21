@@ -10,7 +10,7 @@ import { SystemTypes } from "../types/system-types";
 /**
  * This module is used for generate ui based on choice [optional].
  */
-export default class HouseWindow {
+export class HouseWindow {
     private config!: SystemTypes.AppConfig;
     private smartHouse: SmartHouse;
     private eventGenerator: EventGenerator;
@@ -23,15 +23,18 @@ export default class HouseWindow {
         this.init();
     }
 
-    createWindow() {
+    private init(): void {
+        this.createWindow();
+        ipcMain.on("pick-file-path", () => this.pickSavePath()); // To be discarded.
+    }
+
+    private createWindow(): void {
         this.window = new BrowserWindow({
             width: 1120,
             height: 800,
             webPreferences: {
                 nodeIntegration: false,
                 contextIsolation: false
-                // ,
-                // preload: path.join(__dirname, "preload.js")
             }
         });
 
@@ -39,15 +42,7 @@ export default class HouseWindow {
         this.window.webContents.openDevTools();
     }
 
-    init() {
-        this.createWindow();
-        ipcMain.on("pick-file-path", () => this.pickSavePath());
-        ipcMain.on(IPCChannel.RENDERER_DEVICE_ADD, (event, args) => this.onAddDevice(event, args));
-        ipcMain.on(IPCChannel.RENDERER_DEVICE_REMOVE, (event, args) => this.onRemoveDevice(event, args));
-        ipcMain.on(IPCChannel.RENDERER_POSITION_CHANGED, (event, args) => this.onPositionChanged(event, args))
-    }
-
-    pickSavePath() {
+    private pickSavePath(): void {
         let option: Electron.SaveDialogOptions = {
             title: "log",
             filters: [
@@ -60,24 +55,5 @@ export default class HouseWindow {
                 this.window.webContents.send("file-path-selected", file);
             }
         });
-    }
-
-    onAddDevice(event: any, args: any) {
-        let result = this.smartHouse.addDevice(args.selectedRoom, args.deviceType, args.deviceID);
-        this.window.webContents.send(IPCChannel.RENDERER_DEVICE_UPDATE, result);
-    }
-
-    onRemoveDevice(event: any, args: any) {
-        let result = this.smartHouse.removeDevice(args.selectedRoom, args.deviceType, args.deviceID);
-        this.window.webContents.send(IPCChannel.RENDERER_DEVICE_UPDATE, result);
-    }
-
-    onPositionChanged(e: any, args: any) {
-        /**
-         * Generate event,
-         * then pass the generated event to the smart house.
-         */
-        let event = this.eventGenerator.happen(args.position, args.device);
-        this.smartHouse.eventHandler(event);
     }
 }
