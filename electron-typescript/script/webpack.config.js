@@ -8,6 +8,9 @@ const layout = "layout1"
 module.exports = {
     
     mode: "development",
+    
+    // Specify compiling code for electron renderer.
+    target: "electron-renderer",
 
     output: {
         path: path.resolve(__dirname, "../dist"),

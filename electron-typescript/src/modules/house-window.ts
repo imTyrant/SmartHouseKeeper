@@ -28,7 +28,7 @@ export default class HouseWindow {
             width: 1120,
             height: 800,
             webPreferences: {
-                nodeIntegration: false,
+                nodeIntegration: true,
                 contextIsolation: false
                 // ,
                 // preload: path.join(__dirname, "preload.js")
