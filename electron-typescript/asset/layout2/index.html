@@ -8,9 +8,17 @@
     </head>
 
     <body>
-        <div id="hello-container" style="top:50px;left:100px;position:absolute"></div>
-        <p>Hello World</p>
-        <img src="./img/add.svg" width="40px", height="40px">
-        <script src="../../dist/renderer/index.js"></script> 
+        <div id="root">
+            <button id="click-me">Click me!</button>
+        </div>
+
+        <script>
+            var ipcMain = require('electron').ipcMain;
+            var counter = 0;
+            $("click-me").on("click", () => {
+                counter ++;
+                ipcMain.send("btn-clicked", {times: counter})
+            });
+        </script>
     </body>
 </html>

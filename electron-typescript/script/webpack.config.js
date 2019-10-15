@@ -9,6 +9,9 @@ module.exports = {
     
     mode: "development",
 
+    // Specify compile code for electron renderer.
+    target: "electron-renderer",
+
     output: {
         path: path.resolve(__dirname, "../dist"),
         filename: "ui/[name].js"
