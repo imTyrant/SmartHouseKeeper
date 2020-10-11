@@ -1,9 +1,11 @@
 "use strict"
 
+import { SystemTypes } from "./SystemTypes";
+
 export namespace IPCChannel {
     export const RENDERER_DEVICE_ADD = "device-add-btn-clicked";
     export interface AddDeviceArgs {
-        args: any;
+        config: SystemTypes.DeviceConfigInfo;
     };
 
     export const RENDERER_DEVICE_REMOVE = "device-remove-btn-clicked";

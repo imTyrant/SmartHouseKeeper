@@ -1,9 +1,11 @@
-import { app } from "electron";
+import { app, Cookies } from "electron";
+import * as figlet from 'figlet';
+import chalk from 'chalk';
 import * as path from 'path';
 import * as os from 'os';
 import * as fs from 'fs';
 import { HouseWindow } from "./modules/HouseWindow"
-import { SystemTypes } from "./types/system-types";
+import { SystemTypes } from "./types/SystemTypes";
 import SmartHouse from "./modules/SmartHouse";
 
 const DefaultConfigFileName = "config.json";
@@ -53,4 +55,11 @@ class SmartHouseKeeper {
     }
 }
 
+// Just for fun.
+const smart = figlet.textSync("Smart", {font: "Isometric1"});
+const house = figlet.textSync("House", {font: "Isometric1"});
+const keeper = figlet.textSync("Keeper", {font: "Isometric1"});
+console.log(chalk.blue(smart), chalk.green(house), chalk.red(keeper));
+
+// Let's go back main mission.
 new SmartHouseKeeper();

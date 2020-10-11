@@ -1,7 +1,7 @@
 "use strict"
 
 import { ipcMain, IpcMainEvent } from "electron";
-import { IPCChannel } from "../types/ipc-channel";
+import { IPCChannel } from "../types/IPCChannel";
 
 export interface IRendererEventHandler {
     onAddDevice: (args: IPCChannel.AddDeviceArgs) => void;
@@ -9,7 +9,7 @@ export interface IRendererEventHandler {
     onUpdateDevice: (args: IPCChannel.UpdateDeviceArgs) => void;
 }
 
-export class RendererEventHandler {
+export class RendererConnector {
     private handler: IRendererEventHandler;
 
     constructor(handler: IRendererEventHandler) {

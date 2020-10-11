@@ -19,7 +19,6 @@ export interface AddedDevice {
     room: string;
     coords: Coords;
     status: number;
-    detail: RendererTypes.DeviceDetail;
 }
 
 export interface AddedDevicesList {

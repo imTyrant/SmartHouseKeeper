@@ -15,7 +15,6 @@ export function configReducer(state: AddedDevicesList = initState, action: Devic
                 id,
                 identifier: action.config.device,
                 room: action.config.room,
-                detail: action.config.detail,
                 coords: { x: action.config.x, y: action.config.y },
                 status: 0 // Here, we set the first state as its default state！
             });

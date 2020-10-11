@@ -1,27 +1,24 @@
 "use strict"
-import * as path from 'path';
-import * as crypto from 'crypto';
-import AppSimulator from './AppSimulator';
-import HouseDetail from '../config/house-detail';
-import { IPCChannel } from '../types/ipc-channel';
+import { IPCChannel } from '../types/IPCChannel';
 import Queue from '../utils/queue';
-import { IRendererEventHandler, RendererEventHandler } from './RendererEventHandler';
-
+import { IRendererEventHandler, RendererConnector } from './RendererConnector';
+import { ConfigTypes } from '../types/ConfigTypes';
 
 export default class SmartHouse implements IRendererEventHandler {
     private installedApps: any;
-    private addedDevices: any;
-    private deviceList: any;
-    private roomList: any;
-
-    private rendererEventHandler: RendererEventHandler;
+    private deviceConfig: ConfigTypes.DevicesList;
+    
+    private rendererConnector: RendererConnector;
 
     constructor(config: any) {
         this.onAddDevice.bind(this);
         this.onRemoveDevice.bind(this);
         this.onUpdateDevice.bind(this);
 
-        this.addedDevices = new Map();
+        this.deviceConfig = { 
+            roomIndex: new Map<string, string[]>(),
+            dIdIndex: new Map<string, ConfigTypes.DeviceConfigInfo>(),
+        };
         this.installedApps = new Map();
 
         if (config === null) {
@@ -30,17 +27,16 @@ export default class SmartHouse implements IRendererEventHandler {
             // parse config;
         }
 
-        this.rendererEventHandler = new RendererEventHandler(this);
-    }   
+        this.rendererConnector = new RendererConnector(this);
+    }
 
 
     public onAddDevice(args: IPCChannel.AddDeviceArgs): void {
-        // Based on the args update the [this.addedDevices]
-        console.log(args);
+        // Based on the args update [this.deviceConfig]
     }
 
     public onUpdateDevice(args: IPCChannel.UpdateDeviceArgs): void {
-
+        
     }
 
     public onRemoveDevice(args: IPCChannel.RemoveDeviceArgs): void {

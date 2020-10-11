@@ -4,8 +4,8 @@ import * as path from "path";
 import * as fs from "fs";
 import { BrowserWindow, ipcMain, dialog } from "electron";
 import EventGenerator from "./EventGenerator";
-import { IPCChannel } from "../types/ipc-channel";
-import { SystemTypes } from "../types/system-types";
+import { IPCChannel } from "../types/IPCChannel";
+import { SystemTypes } from "../types/SystemTypes";
 
 /**
  * This module is used for generate ui based on choice [optional].
